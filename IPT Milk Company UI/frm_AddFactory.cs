@@ -12,10 +12,11 @@ using System.IO;
 using System.Linq;
 using System.Text;
 using System.Windows.Forms;
+using MetroFramework.Forms;
 
 namespace IPT_Milk_Company_UI
 {
-    public partial class frm_AddFactory : Form
+    public partial class frm_AddFactory : MetroForm
     {
         public frm_AddFactory()
         {

@@ -42,7 +42,7 @@
             // 
             this.label5.AutoSize = true;
             this.label5.BackColor = System.Drawing.Color.Transparent;
-            this.label5.Location = new System.Drawing.Point(13, 9);
+            this.label5.Location = new System.Drawing.Point(23, 60);
             this.label5.Name = "label5";
             this.label5.Size = new System.Drawing.Size(35, 13);
             this.label5.TabIndex = 15;
@@ -50,7 +50,7 @@
             // 
             // txt_Name
             // 
-            this.txt_Name.Location = new System.Drawing.Point(61, 6);
+            this.txt_Name.Location = new System.Drawing.Point(71, 57);
             this.txt_Name.Name = "txt_Name";
             this.txt_Name.Size = new System.Drawing.Size(142, 20);
             this.txt_Name.TabIndex = 2;
@@ -58,7 +58,7 @@
             // 
             // btn_addProduct
             // 
-            this.btn_addProduct.Location = new System.Drawing.Point(6, 115);
+            this.btn_addProduct.Location = new System.Drawing.Point(16, 166);
             this.btn_addProduct.Name = "btn_addProduct";
             this.btn_addProduct.Size = new System.Drawing.Size(197, 23);
             this.btn_addProduct.TabIndex = 16;
@@ -70,7 +70,7 @@
             // 
             this.label1.AutoSize = true;
             this.label1.BackColor = System.Drawing.Color.Transparent;
-            this.label1.Location = new System.Drawing.Point(7, 35);
+            this.label1.Location = new System.Drawing.Point(17, 86);
             this.label1.Name = "label1";
             this.label1.Size = new System.Drawing.Size(47, 13);
             this.label1.TabIndex = 18;
@@ -78,7 +78,7 @@
             // 
             // txt_Landline
             // 
-            this.txt_Landline.Location = new System.Drawing.Point(61, 32);
+            this.txt_Landline.Location = new System.Drawing.Point(71, 83);
             this.txt_Landline.Name = "txt_Landline";
             this.txt_Landline.Size = new System.Drawing.Size(142, 20);
             this.txt_Landline.TabIndex = 17;
@@ -91,15 +91,14 @@
             this.txt_Location.BorderStyle = System.Windows.Forms.BorderStyle.None;
             this.txt_Location.Enabled = false;
             this.txt_Location.Font = new System.Drawing.Font("Segoe UI", 10.25F);
-            this.txt_Location.Location = new System.Drawing.Point(61, 57);
+            this.txt_Location.Location = new System.Drawing.Point(71, 108);
             this.txt_Location.Name = "txt_Location";
             this.txt_Location.Size = new System.Drawing.Size(142, 19);
             this.txt_Location.TabIndex = 24;
             // 
             // btn_AddLocation
             // 
-            this.btn_AddLocation.Font = new System.Drawing.Font("Segoe UI", 9F);
-            this.btn_AddLocation.Location = new System.Drawing.Point(61, 82);
+            this.btn_AddLocation.Location = new System.Drawing.Point(71, 133);
             this.btn_AddLocation.Name = "btn_AddLocation";
             this.btn_AddLocation.Size = new System.Drawing.Size(142, 26);
             this.btn_AddLocation.TabIndex = 23;
@@ -110,7 +109,7 @@
             // label7
             // 
             this.label7.AutoSize = true;
-            this.label7.Location = new System.Drawing.Point(7, 61);
+            this.label7.Location = new System.Drawing.Point(17, 112);
             this.label7.Name = "label7";
             this.label7.Size = new System.Drawing.Size(48, 13);
             this.label7.TabIndex = 22;
@@ -120,7 +119,7 @@
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(215, 145);
+            this.ClientSize = new System.Drawing.Size(223, 206);
             this.Controls.Add(this.txt_Location);
             this.Controls.Add(this.btn_AddLocation);
             this.Controls.Add(this.label7);
@@ -130,6 +129,7 @@
             this.Controls.Add(this.btn_addProduct);
             this.Controls.Add(this.label5);
             this.Name = "frm_AddOffice";
+            this.Resizable = false;
             this.Text = "Add Office";
             this.Load += new System.EventHandler(this.frm_AddOffice_Load);
             this.ResumeLayout(false);

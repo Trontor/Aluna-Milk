@@ -6,10 +6,11 @@ using System.Drawing;
 using System.Linq;
 using System.Text;
 using System.Windows.Forms;
+using MetroFramework.Forms;
 
 namespace IPT_Milk_Company_UI
 {
-    public partial class Products : Form
+    public partial class Products : MetroForm
     {
         public Products()
         {

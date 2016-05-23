@@ -11,10 +11,11 @@ using System.Drawing;
 using System.Drawing;
 using System.IO;
 using System.Windows.Forms;
+using MetroFramework.Forms;
 
 namespace IPT_Milk_Company_UI
 {
-    public partial class frm_AddProduct : Form
+    public partial class frm_AddProduct : MetroForm
     {
         private string imageDirectory = Path.Combine(Application.StartupPath, "Aluna Product Images");
         private string imagePath = "";
@@ -46,7 +47,7 @@ namespace IPT_Milk_Company_UI
         {
             Directory.CreateDirectory(this.imageDirectory);
             Path.GetFileNameWithoutExtension(this.imagePath);
-            this.pictureBox1.Image = (Image)ImageHelper.ResizeImage(Image.FromFile(this.imagePath), 100, 100);
+            this.pictureBox1.Image = (Image)Image.FromFile(this.imagePath);
         }
 
         private void AddProduct()

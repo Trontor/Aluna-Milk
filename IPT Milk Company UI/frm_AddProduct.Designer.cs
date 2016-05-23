@@ -29,7 +29,7 @@
         private void InitializeComponent()
         {
             this.flw_Products = new System.Windows.Forms.FlowLayoutPanel();
-            this.btn_addProduct = new System.Windows.Forms.Button();
+            this.btn_addProduct =  new MetroFramework.Controls.MetroButton();
             this.SuspendLayout();
             // 
             // flw_Products
@@ -65,6 +65,6 @@
         #endregion
 
         private System.Windows.Forms.FlowLayoutPanel flw_Products;
-        private System.Windows.Forms.Button btn_addProduct;
+        private MetroFramework.Controls.MetroButton btn_addProduct;
     }
 }

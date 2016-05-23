@@ -7,10 +7,11 @@ using System.IO;
 using System.Linq;
 using System.Text;
 using System.Windows.Forms;
+using MetroFramework.Forms;
 
 namespace IPT_Milk_Company_UI
 {
-    public partial class Form1 : Form
+    public partial class Form1 : MetroForm
     {
         private DataTable table_Employees = new DataTable();
         private DataTable table_Persons = new DataTable();
@@ -28,7 +29,7 @@ namespace IPT_Milk_Company_UI
             table_Persons = DatabaseHelper.GetTable("Person");
             person_Id = int.Parse(table_Employees.Rows[emp_ID - 1]["Person ID"].ToString());
             string name = table_Persons.Rows[person_Id - 1]["First Name"].ToString();
-            Text = "Welcome " + name;
+            lbl_Subtext.Text = "Welcome " + name;
         }
 
         private void btn_addOrder_Click(object sender, EventArgs e)
@@ -43,6 +44,11 @@ namespace IPT_Milk_Company_UI
         private void btn_addFactory_Click(object sender, EventArgs e)
         {
             new frm_AddFactory().Show();
-        } 
+        }
+
+        private void Form1_Load(object sender, EventArgs e)
+        {
+
+        }
     }
 }

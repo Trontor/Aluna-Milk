@@ -12,10 +12,11 @@ using System.IO;
 using System.Linq;
 using System.Text;
 using System.Windows.Forms;
+using MetroFramework.Forms;
 
 namespace IPT_Milk_Company_UI
 {
-    public partial class frm_AddLocation : Form
+    public partial class frm_AddLocation : MetroForm
     {
         public int locID = -1;
         public frm_AddLocation()

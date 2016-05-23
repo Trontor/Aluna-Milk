@@ -40,7 +40,7 @@
             // label5
             // 
             this.label5.AutoSize = true;
-            this.label5.Location = new System.Drawing.Point(7, 9);
+            this.label5.Location = new System.Drawing.Point(9, 66);
             this.label5.Name = "label5";
             this.label5.Size = new System.Drawing.Size(45, 13);
             this.label5.TabIndex = 15;
@@ -48,7 +48,7 @@
             // 
             // txt_Address
             // 
-            this.txt_Address.Location = new System.Drawing.Point(61, 6);
+            this.txt_Address.Location = new System.Drawing.Point(63, 63);
             this.txt_Address.Name = "txt_Address";
             this.txt_Address.Size = new System.Drawing.Size(142, 20);
             this.txt_Address.TabIndex = 2;
@@ -56,7 +56,7 @@
             // 
             // btn_addProduct
             // 
-            this.btn_addProduct.Location = new System.Drawing.Point(6, 84);
+            this.btn_addProduct.Location = new System.Drawing.Point(8, 141);
             this.btn_addProduct.Name = "btn_addProduct";
             this.btn_addProduct.Size = new System.Drawing.Size(197, 23);
             this.btn_addProduct.TabIndex = 16;
@@ -67,7 +67,7 @@
             // label1
             // 
             this.label1.AutoSize = true;
-            this.label1.Location = new System.Drawing.Point(17, 35);
+            this.label1.Location = new System.Drawing.Point(19, 92);
             this.label1.Name = "label1";
             this.label1.Size = new System.Drawing.Size(24, 13);
             this.label1.TabIndex = 18;
@@ -75,7 +75,7 @@
             // 
             // txt_City
             // 
-            this.txt_City.Location = new System.Drawing.Point(61, 32);
+            this.txt_City.Location = new System.Drawing.Point(63, 89);
             this.txt_City.Name = "txt_City";
             this.txt_City.Size = new System.Drawing.Size(142, 20);
             this.txt_City.TabIndex = 17;
@@ -84,7 +84,7 @@
             // label2
             // 
             this.label2.AutoSize = true;
-            this.label2.Location = new System.Drawing.Point(3, 61);
+            this.label2.Location = new System.Drawing.Point(5, 118);
             this.label2.Name = "label2";
             this.label2.Size = new System.Drawing.Size(52, 13);
             this.label2.TabIndex = 20;
@@ -92,7 +92,7 @@
             // 
             // txt_Postcode
             // 
-            this.txt_Postcode.Location = new System.Drawing.Point(61, 58);
+            this.txt_Postcode.Location = new System.Drawing.Point(63, 115);
             this.txt_Postcode.Name = "txt_Postcode";
             this.txt_Postcode.Size = new System.Drawing.Size(142, 20);
             this.txt_Postcode.TabIndex = 19;
@@ -104,7 +104,7 @@
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(215, 118);
+            this.ClientSize = new System.Drawing.Size(215, 178);
             this.Controls.Add(this.label2);
             this.Controls.Add(this.txt_Postcode);
             this.Controls.Add(this.label1);
@@ -113,6 +113,7 @@
             this.Controls.Add(this.label5);
             this.Controls.Add(this.txt_Address);
             this.Name = "frm_AddLocation";
+            this.Resizable = false;
             this.Text = "Add Location";
             this.ResumeLayout(false);
             this.PerformLayout();

@@ -38,7 +38,7 @@
             this.label2 = new System.Windows.Forms.Label();
             this.label5 = new System.Windows.Forms.Label();
             this.txt_Product_Name = new System.Windows.Forms.TextBox();
-            this.btn_addProduct = new System.Windows.Forms.Button();
+            this.btn_addProduct =  new MetroFramework.Controls.MetroButton();
             this.SuspendLayout();
             // 
             // label1
@@ -168,6 +168,6 @@
         private System.Windows.Forms.Label label2;
         private System.Windows.Forms.Label label5;
         private System.Windows.Forms.TextBox txt_Product_Name;
-        private System.Windows.Forms.Button btn_addProduct;
+        private MetroFramework.Controls.MetroButton btn_addProduct;
     }
 }

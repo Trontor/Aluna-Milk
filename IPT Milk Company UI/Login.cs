@@ -8,10 +8,11 @@ using System.Security.Cryptography;
 using System.Text;
 using System.Windows.Forms;
 using IPT_Milk_Company_UI;
+using MetroFramework.Forms;
 
 namespace IPT_Milk_Company_UI
 {
-    public partial class Login : Form
+    public partial class Login : MetroForm
     {
         public string CalculateMD5Hash(string input)
 
@@ -98,6 +99,7 @@ namespace IPT_Milk_Company_UI
             txt_Username.Text = "rohyl";
             txt_Password.Text = "PASSWORD";
 #endif
+            ValidateLogin();
         }
 
         private void txt_Password_KeyDown(object sender, KeyEventArgs e)

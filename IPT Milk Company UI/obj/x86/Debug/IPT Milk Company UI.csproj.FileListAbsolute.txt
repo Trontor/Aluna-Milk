@@ -46,3 +46,22 @@ D:\IPT Milk Company UI\IPT Milk Company UI\obj\x86\Debug\IPT Milk Company UI.exe
 D:\IPT Milk Company UI\IPT Milk Company UI\obj\x86\Debug\IPT_Milk_Company_UI.frm_AddProduct.resources
 D:\IPT Milk Company UI\IPT Milk Company UI\obj\x86\Debug\IPT Milk Company UI.csprojResolveAssemblyReference.cache
 D:\IPT Milk Company UI\IPT Milk Company UI\obj\x86\Debug\IPT Milk Company UI.csproj.GenerateResource.Cache
+C:\Users\Rohyl Joshi\Source\Repos\Aluna-Milk\IPT Milk Company UI\bin\Debug\IPT Milk Company UI.exe.config
+C:\Users\Rohyl Joshi\Source\Repos\Aluna-Milk\IPT Milk Company UI\obj\x86\Debug\IPT Milk Company UI.exe
+C:\Users\Rohyl Joshi\Source\Repos\Aluna-Milk\IPT Milk Company UI\obj\x86\Debug\IPT Milk Company UI.pdb
+C:\Users\Rohyl Joshi\Source\Repos\Aluna-Milk\IPT Milk Company UI\bin\Debug\IPT Milk Company UI.exe
+C:\Users\Rohyl Joshi\Source\Repos\Aluna-Milk\IPT Milk Company UI\bin\Debug\IPT Milk Company UI.pdb
+C:\Users\Rohyl Joshi\Source\Repos\Aluna-Milk\IPT Milk Company UI\bin\Debug\MetroFramework.dll
+C:\Users\Rohyl Joshi\Source\Repos\Aluna-Milk\IPT Milk Company UI\bin\Debug\MetroFramework.Fonts.dll
+C:\Users\Rohyl Joshi\Source\Repos\Aluna-Milk\IPT Milk Company UI\obj\x86\Debug\IPT Milk Company UI.csprojResolveAssemblyReference.cache
+C:\Users\Rohyl Joshi\Source\Repos\Aluna-Milk\IPT Milk Company UI\obj\x86\Debug\IPT_Milk_Company_UI.Form1.resources
+C:\Users\Rohyl Joshi\Source\Repos\Aluna-Milk\IPT Milk Company UI\obj\x86\Debug\IPT_Milk_Company_UI.frm_AddOffice.resources
+C:\Users\Rohyl Joshi\Source\Repos\Aluna-Milk\IPT Milk Company UI\obj\x86\Debug\IPT_Milk_Company_UI.frm_AddFactory.resources
+C:\Users\Rohyl Joshi\Source\Repos\Aluna-Milk\IPT Milk Company UI\obj\x86\Debug\IPT_Milk_Company_UI.frm_AddLocation.resources
+C:\Users\Rohyl Joshi\Source\Repos\Aluna-Milk\IPT Milk Company UI\obj\x86\Debug\IPT_Milk_Company_UI.frm_AddProduct.resources
+C:\Users\Rohyl Joshi\Source\Repos\Aluna-Milk\IPT Milk Company UI\obj\x86\Debug\IPT_Milk_Company_UI.frm_AddOrder.resources
+C:\Users\Rohyl Joshi\Source\Repos\Aluna-Milk\IPT Milk Company UI\obj\x86\Debug\IPT_Milk_Company_UI.Login.resources
+C:\Users\Rohyl Joshi\Source\Repos\Aluna-Milk\IPT Milk Company UI\obj\x86\Debug\IPT_Milk_Company_UI.ProductItem.resources
+C:\Users\Rohyl Joshi\Source\Repos\Aluna-Milk\IPT Milk Company UI\obj\x86\Debug\IPT_Milk_Company_UI.Products.resources
+C:\Users\Rohyl Joshi\Source\Repos\Aluna-Milk\IPT Milk Company UI\obj\x86\Debug\IPT_Milk_Company_UI.Properties.Resources.resources
+C:\Users\Rohyl Joshi\Source\Repos\Aluna-Milk\IPT Milk Company UI\obj\x86\Debug\IPT Milk Company UI.csproj.GenerateResource.Cache

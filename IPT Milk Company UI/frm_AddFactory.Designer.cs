@@ -44,7 +44,7 @@
             // label5
             // 
             this.label5.AutoSize = true;
-            this.label5.Location = new System.Drawing.Point(3, 9);
+            this.label5.Location = new System.Drawing.Point(23, 69);
             this.label5.Name = "label5";
             this.label5.Size = new System.Drawing.Size(35, 13);
             this.label5.TabIndex = 15;
@@ -52,14 +52,14 @@
             // 
             // txt_Factory_Name
             // 
-            this.txt_Factory_Name.Location = new System.Drawing.Point(51, 6);
+            this.txt_Factory_Name.Location = new System.Drawing.Point(71, 66);
             this.txt_Factory_Name.Name = "txt_Factory_Name";
             this.txt_Factory_Name.Size = new System.Drawing.Size(152, 20);
             this.txt_Factory_Name.TabIndex = 2;
             // 
             // btn_addProduct
             // 
-            this.btn_addProduct.Location = new System.Drawing.Point(6, 172);
+            this.btn_addProduct.Location = new System.Drawing.Point(26, 235);
             this.btn_addProduct.Name = "btn_addProduct";
             this.btn_addProduct.Size = new System.Drawing.Size(197, 23);
             this.btn_addProduct.TabIndex = 16;
@@ -70,7 +70,7 @@
             // label6
             // 
             this.label6.AutoSize = true;
-            this.label6.Location = new System.Drawing.Point(3, 35);
+            this.label6.Location = new System.Drawing.Point(23, 95);
             this.label6.Name = "label6";
             this.label6.Size = new System.Drawing.Size(33, 13);
             this.label6.TabIndex = 18;
@@ -78,7 +78,7 @@
             // 
             // txt_Registration
             // 
-            this.txt_Registration.Location = new System.Drawing.Point(51, 32);
+            this.txt_Registration.Location = new System.Drawing.Point(71, 92);
             this.txt_Registration.Name = "txt_Registration";
             this.txt_Registration.Size = new System.Drawing.Size(152, 20);
             this.txt_Registration.TabIndex = 17;
@@ -86,7 +86,7 @@
             // label7
             // 
             this.label7.AutoSize = true;
-            this.label7.Location = new System.Drawing.Point(3, 58);
+            this.label7.Location = new System.Drawing.Point(23, 118);
             this.label7.Name = "label7";
             this.label7.Size = new System.Drawing.Size(48, 13);
             this.label7.TabIndex = 19;
@@ -95,8 +95,7 @@
             // 
             // btn_Add_Location
             // 
-            this.btn_Add_Location.Font = new System.Drawing.Font("Segoe UI", 9F);
-            this.btn_Add_Location.Location = new System.Drawing.Point(51, 84);
+            this.btn_Add_Location.Location = new System.Drawing.Point(71, 144);
             this.btn_Add_Location.Name = "btn_Add_Location";
             this.btn_Add_Location.Size = new System.Drawing.Size(152, 26);
             this.btn_Add_Location.TabIndex = 20;
@@ -110,7 +109,7 @@
             this.txt_Location.BorderStyle = System.Windows.Forms.BorderStyle.None;
             this.txt_Location.Enabled = false;
             this.txt_Location.Font = new System.Drawing.Font("Segoe UI", 10.25F);
-            this.txt_Location.Location = new System.Drawing.Point(51, 58);
+            this.txt_Location.Location = new System.Drawing.Point(71, 118);
             this.txt_Location.Name = "txt_Location";
             this.txt_Location.Size = new System.Drawing.Size(152, 19);
             this.txt_Location.TabIndex = 21;
@@ -118,8 +117,7 @@
             // 
             // btn_Add_Office
             // 
-            this.btn_Add_Office.Font = new System.Drawing.Font("Segoe UI", 9F);
-            this.btn_Add_Office.Location = new System.Drawing.Point(51, 143);
+            this.btn_Add_Office.Location = new System.Drawing.Point(71, 203);
             this.btn_Add_Office.Name = "btn_Add_Office";
             this.btn_Add_Office.Size = new System.Drawing.Size(152, 26);
             this.btn_Add_Office.TabIndex = 25;
@@ -130,7 +128,7 @@
             // cmb_Office
             // 
             this.cmb_Office.FormattingEnabled = true;
-            this.cmb_Office.Location = new System.Drawing.Point(51, 116);
+            this.cmb_Office.Location = new System.Drawing.Point(71, 176);
             this.cmb_Office.Name = "cmb_Office";
             this.cmb_Office.Size = new System.Drawing.Size(152, 21);
             this.cmb_Office.TabIndex = 24;
@@ -138,7 +136,7 @@
             // label1
             // 
             this.label1.AutoSize = true;
-            this.label1.Location = new System.Drawing.Point(3, 119);
+            this.label1.Location = new System.Drawing.Point(23, 179);
             this.label1.Name = "label1";
             this.label1.Size = new System.Drawing.Size(35, 13);
             this.label1.TabIndex = 23;
@@ -148,8 +146,7 @@
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.BackColor = System.Drawing.Color.White;
-            this.ClientSize = new System.Drawing.Size(210, 205);
+            this.ClientSize = new System.Drawing.Size(252, 281);
             this.Controls.Add(this.btn_Add_Office);
             this.Controls.Add(this.cmb_Office);
             this.Controls.Add(this.label1);

@@ -62,10 +62,10 @@ namespace IPT_Milk_Company_UI
             string imagePath = table.Rows[comboBox2.SelectedIndex]["ImagePath"].ToString();
             if (File.Exists(imagePath))
             {
-                pictureBox1.Image = ImageHelper.ResizeImage(Image.FromFile(imagePath), 100, 100);
+                pictureBox1.Image = ImageHelper.ResizeImage(Image.FromFile(imagePath),pictureBox1.Width,pictureBox1.Height);
             }
             else
-                pictureBox1.Image = ImageHelper.ResizeImage(Properties.Resources.question, 100, 100);
+                pictureBox1.Image = ImageHelper.ResizeImage(Properties.Resources.question, pictureBox1.Width, pictureBox1.Height);
             UpdatePrice();
         }
     }

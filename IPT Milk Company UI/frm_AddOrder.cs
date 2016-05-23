@@ -12,10 +12,11 @@ using System.Data.OleDb;
 using System.Drawing;
 using System.Windows.Forms;
 using System.Windows.Forms.Layout;
+using MetroFramework.Forms;
 
 namespace IPT_Milk_Company_UI
 {
-    public class frm_AddOrder : Form
+    public class frm_AddOrder : MetroForm
     {
         private IContainer components = (IContainer)null;
         private Button btn_addProduct;
@@ -158,18 +159,22 @@ namespace IPT_Milk_Company_UI
             // 
             // btn_addProduct
             // 
-            this.btn_addProduct.Location = new System.Drawing.Point(11, 98);
+            this.btn_addProduct.FlatAppearance.BorderColor = System.Drawing.Color.LightSeaGreen;
+            this.btn_addProduct.FlatAppearance.MouseDownBackColor = System.Drawing.Color.DarkCyan;
+            this.btn_addProduct.FlatAppearance.MouseOverBackColor = System.Drawing.Color.CadetBlue;
+            this.btn_addProduct.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.btn_addProduct.Location = new System.Drawing.Point(23, 152);
             this.btn_addProduct.Name = "btn_addProduct";
             this.btn_addProduct.Size = new System.Drawing.Size(561, 23);
             this.btn_addProduct.TabIndex = 3;
             this.btn_addProduct.Text = "Add Product";
-            this.btn_addProduct.UseVisualStyleBackColor = true;
+            this.btn_addProduct.UseVisualStyleBackColor = false;
             this.btn_addProduct.Click += new System.EventHandler(this.btn_addProduct_Click);
             // 
             // label1
             // 
             this.label1.AutoSize = true;
-            this.label1.Location = new System.Drawing.Point(21, 13);
+            this.label1.Location = new System.Drawing.Point(25, 66);
             this.label1.Name = "label1";
             this.label1.Size = new System.Drawing.Size(38, 13);
             this.label1.TabIndex = 4;
@@ -178,16 +183,16 @@ namespace IPT_Milk_Company_UI
             // cmb_Dealer
             // 
             this.cmb_Dealer.FormattingEnabled = true;
-            this.cmb_Dealer.Location = new System.Drawing.Point(83, 10);
+            this.cmb_Dealer.Location = new System.Drawing.Point(99, 63);
             this.cmb_Dealer.Name = "cmb_Dealer";
-            this.cmb_Dealer.Size = new System.Drawing.Size(490, 21);
+            this.cmb_Dealer.Size = new System.Drawing.Size(486, 21);
             this.cmb_Dealer.TabIndex = 5;
             this.cmb_Dealer.SelectedIndexChanged += new System.EventHandler(this.cmb_Dealer_SelectedIndexChanged);
             // 
             // label2
             // 
             this.label2.AutoSize = true;
-            this.label2.Location = new System.Drawing.Point(2, 40);
+            this.label2.Location = new System.Drawing.Point(25, 93);
             this.label2.Name = "label2";
             this.label2.Size = new System.Drawing.Size(76, 13);
             this.label2.TabIndex = 6;
@@ -195,15 +200,15 @@ namespace IPT_Milk_Company_UI
             // 
             // dtp_Order_Date
             // 
-            this.dtp_Order_Date.Location = new System.Drawing.Point(83, 38);
+            this.dtp_Order_Date.Location = new System.Drawing.Point(99, 91);
             this.dtp_Order_Date.Name = "dtp_Order_Date";
-            this.dtp_Order_Date.Size = new System.Drawing.Size(489, 20);
+            this.dtp_Order_Date.Size = new System.Drawing.Size(485, 20);
             this.dtp_Order_Date.TabIndex = 7;
             // 
             // label3
             // 
             this.label3.AutoSize = true;
-            this.label3.Location = new System.Drawing.Point(8, 72);
+            this.label3.Location = new System.Drawing.Point(25, 125);
             this.label3.Name = "label3";
             this.label3.Size = new System.Drawing.Size(64, 13);
             this.label3.TabIndex = 8;
@@ -212,7 +217,7 @@ namespace IPT_Milk_Company_UI
             // lbl_servicedEmployee
             // 
             this.lbl_servicedEmployee.Font = new System.Drawing.Font("Segoe UI", 10.25F);
-            this.lbl_servicedEmployee.Location = new System.Drawing.Point(83, 66);
+            this.lbl_servicedEmployee.Location = new System.Drawing.Point(95, 121);
             this.lbl_servicedEmployee.Name = "lbl_servicedEmployee";
             this.lbl_servicedEmployee.Size = new System.Drawing.Size(489, 19);
             this.lbl_servicedEmployee.TabIndex = 9;
@@ -222,7 +227,7 @@ namespace IPT_Milk_Company_UI
             // lbl_totalPrice
             // 
             this.lbl_totalPrice.Font = new System.Drawing.Font("Segoe UI", 10.25F);
-            this.lbl_totalPrice.Location = new System.Drawing.Point(12, 447);
+            this.lbl_totalPrice.Location = new System.Drawing.Point(24, 500);
             this.lbl_totalPrice.Name = "lbl_totalPrice";
             this.lbl_totalPrice.Size = new System.Drawing.Size(560, 19);
             this.lbl_totalPrice.TabIndex = 10;
@@ -234,7 +239,7 @@ namespace IPT_Milk_Company_UI
             this.flw_Products.AutoScroll = true;
             this.flw_Products.BackColor = System.Drawing.Color.White;
             this.flw_Products.FlowDirection = System.Windows.Forms.FlowDirection.TopDown;
-            this.flw_Products.Location = new System.Drawing.Point(12, 127);
+            this.flw_Products.Location = new System.Drawing.Point(24, 180);
             this.flw_Products.Name = "flw_Products";
             this.flw_Products.Size = new System.Drawing.Size(560, 317);
             this.flw_Products.TabIndex = 11;
@@ -245,20 +250,23 @@ namespace IPT_Milk_Company_UI
             // 
             // btn_Place_Order
             // 
-            this.btn_Place_Order.Location = new System.Drawing.Point(11, 470);
+            this.btn_Place_Order.FlatAppearance.BorderColor = System.Drawing.Color.LightSeaGreen;
+            this.btn_Place_Order.FlatAppearance.MouseDownBackColor = System.Drawing.Color.DarkCyan;
+            this.btn_Place_Order.FlatAppearance.MouseOverBackColor = System.Drawing.Color.CadetBlue;
+            this.btn_Place_Order.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.btn_Place_Order.Location = new System.Drawing.Point(23, 523);
             this.btn_Place_Order.Name = "btn_Place_Order";
             this.btn_Place_Order.Size = new System.Drawing.Size(561, 31);
             this.btn_Place_Order.TabIndex = 12;
             this.btn_Place_Order.Text = "Place Order";
-            this.btn_Place_Order.UseVisualStyleBackColor = true;
+            this.btn_Place_Order.UseVisualStyleBackColor = false;
             this.btn_Place_Order.Click += new System.EventHandler(this.btn_Place_Order_Click);
             // 
             // frm_AddOrder
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.BackColor = System.Drawing.Color.White;
-            this.ClientSize = new System.Drawing.Size(584, 549);
+            this.ClientSize = new System.Drawing.Size(610, 567);
             this.Controls.Add(this.btn_Place_Order);
             this.Controls.Add(this.flw_Products);
             this.Controls.Add(this.lbl_totalPrice);
@@ -270,7 +278,8 @@ namespace IPT_Milk_Company_UI
             this.Controls.Add(this.label1);
             this.Controls.Add(this.btn_addProduct);
             this.Name = "frm_AddOrder";
-            this.Text = "frm_AddOrder";
+            this.Resizable = false;
+            this.Text = "Process Order";
             this.Load += new System.EventHandler(this.frm_AddOrder_Load);
             this.ResumeLayout(false);
             this.PerformLayout();
