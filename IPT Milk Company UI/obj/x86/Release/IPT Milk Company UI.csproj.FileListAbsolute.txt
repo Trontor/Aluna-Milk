@@ -1,0 +1,12 @@
+D:\Dropbox\IPT Milk Company UI\IPT Milk Company UI\bin\Release\IPT Milk Company UI.exe.config
+D:\Dropbox\IPT Milk Company UI\IPT Milk Company UI\bin\Release\Milk Database.accdb
+D:\Dropbox\IPT Milk Company UI\IPT Milk Company UI\bin\Release\IPT Milk Company UI.exe
+D:\Dropbox\IPT Milk Company UI\IPT Milk Company UI\bin\Release\IPT Milk Company UI.pdb
+D:\Dropbox\IPT Milk Company UI\IPT Milk Company UI\obj\x86\Release\IPT_Milk_Company_UI.Form1.resources
+D:\Dropbox\IPT Milk Company UI\IPT Milk Company UI\obj\x86\Release\IPT_Milk_Company_UI.frm_AddOrder.resources
+D:\Dropbox\IPT Milk Company UI\IPT Milk Company UI\obj\x86\Release\IPT_Milk_Company_UI.frm_AddProduct.resources
+D:\Dropbox\IPT Milk Company UI\IPT Milk Company UI\obj\x86\Release\IPT_Milk_Company_UI.ProductItem.resources
+D:\Dropbox\IPT Milk Company UI\IPT Milk Company UI\obj\x86\Release\IPT_Milk_Company_UI.Properties.Resources.resources
+D:\Dropbox\IPT Milk Company UI\IPT Milk Company UI\obj\x86\Release\IPT Milk Company UI.csproj.GenerateResource.Cache
+D:\Dropbox\IPT Milk Company UI\IPT Milk Company UI\obj\x86\Release\IPT Milk Company UI.exe
+D:\Dropbox\IPT Milk Company UI\IPT Milk Company UI\obj\x86\Release\IPT Milk Company UI.pdb

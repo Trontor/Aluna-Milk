@@ -1,0 +1,48 @@
+D:\Dropbox\IPT Milk Company UI\IPT Milk Company UI\bin\Debug\IPT Milk Company UI.exe.config
+D:\Dropbox\IPT Milk Company UI\IPT Milk Company UI\obj\x86\Debug\IPT Milk Company UI.exe
+D:\Dropbox\IPT Milk Company UI\IPT Milk Company UI\obj\x86\Debug\IPT Milk Company UI.pdb
+D:\Dropbox\IPT Milk Company UI\IPT Milk Company UI\obj\x86\Debug\IPT Milk Company UI.csprojResolveAssemblyReference.cache
+D:\Dropbox\IPT Milk Company UI\IPT Milk Company UI\obj\x86\Debug\IPT_Milk_Company_UI.Form1.resources
+D:\Dropbox\IPT Milk Company UI\IPT Milk Company UI\obj\x86\Debug\IPT_Milk_Company_UI.frm_AddOffice.resources
+D:\Dropbox\IPT Milk Company UI\IPT Milk Company UI\obj\x86\Debug\IPT_Milk_Company_UI.frm_AddOrder.resources
+D:\Dropbox\IPT Milk Company UI\IPT Milk Company UI\obj\x86\Debug\IPT_Milk_Company_UI.frm_AddFactory.resources
+D:\Dropbox\IPT Milk Company UI\IPT Milk Company UI\obj\x86\Debug\IPT_Milk_Company_UI.frm_AddLocation.resources
+D:\Dropbox\IPT Milk Company UI\IPT Milk Company UI\obj\x86\Debug\IPT_Milk_Company_UI.Login.resources
+D:\Dropbox\IPT Milk Company UI\IPT Milk Company UI\obj\x86\Debug\IPT_Milk_Company_UI.ProductItem.resources
+D:\Dropbox\IPT Milk Company UI\IPT Milk Company UI\obj\x86\Debug\IPT_Milk_Company_UI.Products.resources
+D:\Dropbox\IPT Milk Company UI\IPT Milk Company UI\obj\x86\Debug\IPT_Milk_Company_UI.Properties.Resources.resources
+D:\Dropbox\IPT Milk Company UI\IPT Milk Company UI\obj\x86\Debug\IPT Milk Company UI.csproj.GenerateResource.Cache
+D:\Dropbox\IPT Milk Company UI\IPT Milk Company UI\bin\Debug\Milk Database.accdb
+D:\Dropbox\IPT Milk Company UI\IPT Milk Company UI\bin\Debug\IPT Milk Company UI.exe
+D:\Dropbox\IPT Milk Company UI\IPT Milk Company UI\bin\Debug\IPT Milk Company UI.pdb
+Z:\IPT Milk Company UI\IPT Milk Company UI\bin\Debug\IPT Milk Company UI.exe.config
+Z:\IPT Milk Company UI\IPT Milk Company UI\obj\x86\Debug\IPT Milk Company UI.pdb
+Z:\IPT Milk Company UI\IPT Milk Company UI\obj\x86\Debug\ResolveAssemblyReference.cache
+Z:\IPT Milk Company UI\IPT Milk Company UI\obj\x86\Debug\IPT_Milk_Company_UI.Form1.resources
+Z:\IPT Milk Company UI\IPT Milk Company UI\obj\x86\Debug\IPT_Milk_Company_UI.frm_AddOffice.resources
+Z:\IPT Milk Company UI\IPT Milk Company UI\obj\x86\Debug\IPT_Milk_Company_UI.frm_AddFactory.resources
+Z:\IPT Milk Company UI\IPT Milk Company UI\obj\x86\Debug\IPT_Milk_Company_UI.frm_AddLocation.resources
+Z:\IPT Milk Company UI\IPT Milk Company UI\obj\x86\Debug\IPT_Milk_Company_UI.frm_AddOrder.resources
+Z:\IPT Milk Company UI\IPT Milk Company UI\obj\x86\Debug\IPT_Milk_Company_UI.Login.resources
+Z:\IPT Milk Company UI\IPT Milk Company UI\obj\x86\Debug\IPT_Milk_Company_UI.ProductItem.resources
+Z:\IPT Milk Company UI\IPT Milk Company UI\obj\x86\Debug\IPT_Milk_Company_UI.Products.resources
+Z:\IPT Milk Company UI\IPT Milk Company UI\obj\x86\Debug\IPT_Milk_Company_UI.Properties.Resources.resources
+Z:\IPT Milk Company UI\IPT Milk Company UI\obj\x86\Debug\GenerateResource.read.1.tlog
+Z:\IPT Milk Company UI\IPT Milk Company UI\obj\x86\Debug\GenerateResource.write.1.tlog
+D:\IPT Milk Company UI\IPT Milk Company UI\bin\Debug\IPT Milk Company UI.exe.config
+D:\IPT Milk Company UI\IPT Milk Company UI\obj\x86\Debug\IPT Milk Company UI.pdb
+D:\IPT Milk Company UI\IPT Milk Company UI\bin\Debug\IPT Milk Company UI.exe
+D:\IPT Milk Company UI\IPT Milk Company UI\bin\Debug\IPT Milk Company UI.pdb
+D:\IPT Milk Company UI\IPT Milk Company UI\obj\x86\Debug\IPT_Milk_Company_UI.Form1.resources
+D:\IPT Milk Company UI\IPT Milk Company UI\obj\x86\Debug\IPT_Milk_Company_UI.frm_AddOffice.resources
+D:\IPT Milk Company UI\IPT Milk Company UI\obj\x86\Debug\IPT_Milk_Company_UI.frm_AddFactory.resources
+D:\IPT Milk Company UI\IPT Milk Company UI\obj\x86\Debug\IPT_Milk_Company_UI.frm_AddLocation.resources
+D:\IPT Milk Company UI\IPT Milk Company UI\obj\x86\Debug\IPT_Milk_Company_UI.frm_AddOrder.resources
+D:\IPT Milk Company UI\IPT Milk Company UI\obj\x86\Debug\IPT_Milk_Company_UI.Login.resources
+D:\IPT Milk Company UI\IPT Milk Company UI\obj\x86\Debug\IPT_Milk_Company_UI.ProductItem.resources
+D:\IPT Milk Company UI\IPT Milk Company UI\obj\x86\Debug\IPT_Milk_Company_UI.Products.resources
+D:\IPT Milk Company UI\IPT Milk Company UI\obj\x86\Debug\IPT_Milk_Company_UI.Properties.Resources.resources
+D:\IPT Milk Company UI\IPT Milk Company UI\obj\x86\Debug\IPT Milk Company UI.exe
+D:\IPT Milk Company UI\IPT Milk Company UI\obj\x86\Debug\IPT_Milk_Company_UI.frm_AddProduct.resources
+D:\IPT Milk Company UI\IPT Milk Company UI\obj\x86\Debug\IPT Milk Company UI.csprojResolveAssemblyReference.cache
+D:\IPT Milk Company UI\IPT Milk Company UI\obj\x86\Debug\IPT Milk Company UI.csproj.GenerateResource.Cache
