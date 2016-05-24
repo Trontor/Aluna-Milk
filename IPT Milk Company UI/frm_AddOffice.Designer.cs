@@ -58,6 +58,8 @@
             // 
             // btn_addProduct
             // 
+            this.btn_addProduct.FlatAppearance.BorderColor = System.Drawing.Color.FromArgb(((int)(((byte)(0)))), ((int)(((byte)(192)))), ((int)(((byte)(192)))));
+            this.btn_addProduct.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.btn_addProduct.Location = new System.Drawing.Point(16, 166);
             this.btn_addProduct.Name = "btn_addProduct";
             this.btn_addProduct.Size = new System.Drawing.Size(197, 23);
@@ -98,6 +100,8 @@
             // 
             // btn_AddLocation
             // 
+            this.btn_AddLocation.FlatAppearance.BorderColor = System.Drawing.Color.FromArgb(((int)(((byte)(0)))), ((int)(((byte)(192)))), ((int)(((byte)(192)))));
+            this.btn_AddLocation.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.btn_AddLocation.Location = new System.Drawing.Point(71, 133);
             this.btn_AddLocation.Name = "btn_AddLocation";
             this.btn_AddLocation.Size = new System.Drawing.Size(142, 26);

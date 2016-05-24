@@ -48,6 +48,11 @@ namespace IPT_Milk_Company_UI
 
         private void Form1_Load(object sender, EventArgs e)
         {
+        //    DatabaseHelper orderQuery = DatabaseHelper.ExecuteQuery(
+        }
+
+        private void tab_Orders_Click(object sender, EventArgs e)
+        {
 
         }
     }

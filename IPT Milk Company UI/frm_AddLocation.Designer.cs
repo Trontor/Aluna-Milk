@@ -56,6 +56,8 @@
             // 
             // btn_addProduct
             // 
+            this.btn_addProduct.FlatAppearance.BorderColor = System.Drawing.Color.FromArgb(((int)(((byte)(0)))), ((int)(((byte)(192)))), ((int)(((byte)(192)))));
+            this.btn_addProduct.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.btn_addProduct.Location = new System.Drawing.Point(8, 141);
             this.btn_addProduct.Name = "btn_addProduct";
             this.btn_addProduct.Size = new System.Drawing.Size(197, 23);

@@ -98,8 +98,9 @@ namespace IPT_Milk_Company_UI
 #if DEBUG
             txt_Username.Text = "rohyl";
             txt_Password.Text = "PASSWORD";
+            //ValidateLogin();
 #endif
-            ValidateLogin();
+            
         }
 
         private void txt_Password_KeyDown(object sender, KeyEventArgs e)

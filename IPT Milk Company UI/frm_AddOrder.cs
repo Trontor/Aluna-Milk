@@ -118,9 +118,7 @@ namespace IPT_Milk_Company_UI
             this.lbl_servicedEmployee.Text = dataRow["First Name"].ToString() + " " + dataRow["Last Name"].ToString() + " (You)";
             int dealerID = dealerDict[cmb_Dealer.SelectedItem.ToString()];
 
-            string orderQuery =
-                string.Format("INSERT INTO Orders([Dealer ID],[Order Date], [Serviced Employee ID]) VALUES ({0},#{1}#,{2})",
-                    dealerID, orderDate, empID);
+            string orderQuery = string.Format("INSERT INTO Orders([Dealer ID],[Order Date], [Serviced Employee ID]) VALUES ({0},#{1}#,{2})", dealerID, orderDate, empID);
             var rdr = DatabaseHelper.ExecuteQuery(orderQuery);
 
             DataTable orderTable = DatabaseHelper.GetTable("Orders");
@@ -130,10 +128,11 @@ namespace IPT_Milk_Company_UI
 
             foreach (ProductItem item in flw_Products.Controls)
             {
-                string query = string.Format("INSERT INTO [Order Details]([Order ID], [Product Name], [Dealer ID], Price, Quantity) VALUES " +
-                    "({0},{1},{2},{3},{4})", orderID, item.comboBox2.SelectedItem, dealerID, item.totalPrice / (double)item.numericUpDown1.Value, item.numericUpDown1.Value);
-                OleDbDataReader reader = DatabaseHelper.ExecuteQuery(query); 
+                string query = string.Format("INSERT INTO [Order Details]([Order ID], [Product Name], Quantity) VALUES " +
+                    "({0},'{1}',{2})", orderID, item.comboBox2.SelectedItem.ToString(),  item.numericUpDown1.Value);
+                OleDbDataReader reader = DatabaseHelper.ExecuteQuery(query);
             }
+            MessageBox.Show("Order Succesfully Added");
         }
 
         protected override void Dispose(bool disposing)
@@ -279,6 +278,7 @@ namespace IPT_Milk_Company_UI
             this.Controls.Add(this.btn_addProduct);
             this.Name = "frm_AddOrder";
             this.Resizable = false;
+            this.ShadowType = MetroFramework.Forms.MetroFormShadowType.DropShadow;
             this.Text = "Process Order";
             this.Load += new System.EventHandler(this.frm_AddOrder_Load);
             this.ResumeLayout(false);

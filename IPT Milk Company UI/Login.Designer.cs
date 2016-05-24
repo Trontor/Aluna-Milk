@@ -32,7 +32,7 @@
             this.txt_Username = new System.Windows.Forms.TextBox();
             this.txt_Password = new System.Windows.Forms.TextBox();
             this.label2 = new System.Windows.Forms.Label();
-            this.btn_Login =  new System.Windows.Forms.Button();
+            this.btn_Login = new System.Windows.Forms.Button();
             this.SuspendLayout();
             // 
             // label1
@@ -74,11 +74,13 @@
             // 
             // btn_Login
             // 
+            this.btn_Login.FlatAppearance.BorderColor = System.Drawing.Color.FromArgb(((int)(((byte)(0)))), ((int)(((byte)(192)))), ((int)(((byte)(0)))));
+            this.btn_Login.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.btn_Login.Location = new System.Drawing.Point(31, 115);
             this.btn_Login.Name = "btn_Login";
             this.btn_Login.Size = new System.Drawing.Size(204, 23);
             this.btn_Login.TabIndex = 3;
-            this.btn_Login.Text = "Login";            
+            this.btn_Login.Text = "Login";
             this.btn_Login.Click += new System.EventHandler(this.btn_Login_Click);
             // 
             // Login
@@ -92,6 +94,7 @@
             this.Controls.Add(this.txt_Username);
             this.Controls.Add(this.label1);
             this.Name = "Login";
+            this.ShadowType = MetroFramework.Forms.MetroFormShadowType.DropShadow;
             this.Text = "Login";
             this.Load += new System.EventHandler(this.Login_Load);
             this.ResumeLayout(false);

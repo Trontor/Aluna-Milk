@@ -26,6 +26,7 @@ namespace IPT_Milk_Company_UI
             {
                 comboBox2.Items.Add(item["Product Name"]);
             }
+            comboBox2.SelectedIndex = comboBox2.Items.Count - (comboBox2.Items.Count - 1);
         }
         private void ProductItem_Load(object sender, EventArgs e)
         {
@@ -62,7 +63,7 @@ namespace IPT_Milk_Company_UI
             string imagePath = table.Rows[comboBox2.SelectedIndex]["ImagePath"].ToString();
             if (File.Exists(imagePath))
             {
-                pictureBox1.Image = ImageHelper.ResizeImage(Image.FromFile(imagePath),pictureBox1.Width,pictureBox1.Height);
+                pictureBox1.Image = ImageHelper.ResizeImage(Image.FromFile(imagePath), pictureBox1.Width, pictureBox1.Height);
             }
             else
                 pictureBox1.Image = ImageHelper.ResizeImage(Properties.Resources.question, pictureBox1.Width, pictureBox1.Height);

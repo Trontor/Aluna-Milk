@@ -80,9 +80,9 @@
             this.panel3.Controls.Add(this.label4);
             this.panel3.Dock = System.Windows.Forms.DockStyle.Fill;
             this.panel3.ForeColor = System.Drawing.Color.Coral;
-            this.panel3.Location = new System.Drawing.Point(432, 3);
+            this.panel3.Location = new System.Drawing.Point(434, 3);
             this.panel3.Name = "panel3";
-            this.panel3.Size = new System.Drawing.Size(155, 50);
+            this.panel3.Size = new System.Drawing.Size(153, 50);
             this.panel3.TabIndex = 7;
             this.panel3.Paint += new System.Windows.Forms.PaintEventHandler(this.panel3_Paint);
             // 
@@ -92,7 +92,7 @@
             this.btn_removeProduct.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.btn_removeProduct.Font = new System.Drawing.Font("Microsoft Sans Serif", 5.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.btn_removeProduct.ForeColor = System.Drawing.Color.Red;
-            this.btn_removeProduct.Location = new System.Drawing.Point(139, 13);
+            this.btn_removeProduct.Location = new System.Drawing.Point(137, 13);
             this.btn_removeProduct.Margin = new System.Windows.Forms.Padding(0);
             this.btn_removeProduct.Name = "btn_removeProduct";
             this.btn_removeProduct.Size = new System.Drawing.Size(16, 37);
@@ -107,7 +107,7 @@
             this.label3.ForeColor = System.Drawing.Color.Black;
             this.label3.Location = new System.Drawing.Point(0, 0);
             this.label3.Name = "label3";
-            this.label3.Size = new System.Drawing.Size(155, 13);
+            this.label3.Size = new System.Drawing.Size(153, 13);
             this.label3.TabIndex = 4;
             this.label3.Text = "Price (inc. GST)";
             this.label3.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
@@ -130,9 +130,9 @@
             this.panel2.Controls.Add(this.numericUpDown1);
             this.panel2.Controls.Add(this.label2);
             this.panel2.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.panel2.Location = new System.Drawing.Point(308, 3);
+            this.panel2.Location = new System.Drawing.Point(309, 3);
             this.panel2.Name = "panel2";
-            this.panel2.Size = new System.Drawing.Size(118, 50);
+            this.panel2.Size = new System.Drawing.Size(119, 50);
             this.panel2.TabIndex = 4;
             // 
             // numericUpDown1
@@ -140,9 +140,24 @@
             this.numericUpDown1.Anchor = System.Windows.Forms.AnchorStyles.None;
             this.numericUpDown1.AutoSize = true;
             this.numericUpDown1.Location = new System.Drawing.Point(41, 21);
+            this.numericUpDown1.Maximum = new decimal(new int[] {
+            1337,
+            0,
+            0,
+            0});
+            this.numericUpDown1.Minimum = new decimal(new int[] {
+            1,
+            0,
+            0,
+            0});
             this.numericUpDown1.Name = "numericUpDown1";
             this.numericUpDown1.Size = new System.Drawing.Size(42, 20);
             this.numericUpDown1.TabIndex = 4;
+            this.numericUpDown1.Value = new decimal(new int[] {
+            1,
+            0,
+            0,
+            0});
             this.numericUpDown1.ValueChanged += new System.EventHandler(this.numericUpDown1_ValueChanged);
             // 
             // label2
@@ -150,7 +165,7 @@
             this.label2.Dock = System.Windows.Forms.DockStyle.Top;
             this.label2.Location = new System.Drawing.Point(0, 0);
             this.label2.Name = "label2";
-            this.label2.Size = new System.Drawing.Size(118, 13);
+            this.label2.Size = new System.Drawing.Size(119, 13);
             this.label2.TabIndex = 3;
             this.label2.Text = "Quantity";
             this.label2.TextAlign = System.Drawing.ContentAlignment.TopCenter;
@@ -171,7 +186,7 @@
             this.panel1.Dock = System.Windows.Forms.DockStyle.Fill;
             this.panel1.Location = new System.Drawing.Point(59, 3);
             this.panel1.Name = "panel1";
-            this.panel1.Size = new System.Drawing.Size(243, 50);
+            this.panel1.Size = new System.Drawing.Size(244, 50);
             this.panel1.TabIndex = 3;
             // 
             // comboBox2
@@ -194,7 +209,7 @@
             this.label1.Dock = System.Windows.Forms.DockStyle.Top;
             this.label1.Location = new System.Drawing.Point(0, 0);
             this.label1.Name = "label1";
-            this.label1.Size = new System.Drawing.Size(243, 18);
+            this.label1.Size = new System.Drawing.Size(244, 18);
             this.label1.TabIndex = 3;
             this.label1.Text = "Product";
             this.label1.TextAlign = System.Drawing.ContentAlignment.TopCenter;
