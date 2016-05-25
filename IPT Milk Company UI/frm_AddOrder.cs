@@ -28,6 +28,7 @@ namespace IPT_Milk_Company_UI
         private Label lbl_servicedEmployee;
         private Label lbl_totalPrice;
         private FlowLayoutPanel flw_Products;
+        private ComboBox cmb_Time;
         private Button btn_Place_Order;
 
         public frm_AddOrder()
@@ -77,6 +78,7 @@ namespace IPT_Milk_Company_UI
 
         private void frm_AddOrder_Load(object sender, EventArgs e)
         {
+            cmb_Time.SelectedIndex = 0;
             table = DatabaseHelper.GetTable("Dealer");
             List<string> list = new List<string>();
             for (int index = 0; index < table.Rows.Count; ++index)
@@ -99,8 +101,22 @@ namespace IPT_Milk_Company_UI
 
         private void btn_Place_Order_Click(object sender, EventArgs e)
         {
-
-            ValidityChecker validityChecker = new ValidityChecker(dtp_Order_Date, cmb_Dealer);
+            DateTimePicker tempval = new DateTimePicker() {Value = dtp_Order_Date.Value};
+            int hours = 0;
+            switch (cmb_Time.SelectedIndex)
+            {
+                case 0:
+                    hours = 16;
+                    break;
+                case 1:
+                    hours = 16;
+                    break;
+                case 2:
+                    hours = 2;
+                    break;
+            }
+            tempval.Value = tempval.Value.Date.AddHours(hours);
+            ValidityChecker validityChecker = new ValidityChecker(tempval, cmb_Dealer);
             if (validityChecker.InvalidFields().Count == 0)
             {
                 PlaceOrder();
@@ -118,7 +134,9 @@ namespace IPT_Milk_Company_UI
             this.lbl_servicedEmployee.Text = dataRow["First Name"].ToString() + " " + dataRow["Last Name"].ToString() + " (You)";
             int dealerID = dealerDict[cmb_Dealer.SelectedItem.ToString()];
 
-            string orderQuery = string.Format("INSERT INTO Orders([Dealer ID],[Order Date], [Serviced Employee ID]) VALUES ({0},#{1}#,{2})", dealerID, orderDate, empID);
+            string orderQuery =
+                string.Format("INSERT INTO Orders([Dealer ID],[Order Date], [Serviced Employee ID], [Required Date],[Required Time]) VALUES ({0},#{1}#,{2},#{3}#,{4})",
+                    dealerID, orderDate, empID, dtp_Order_Date.Value.Date, cmb_Time.SelectedIndex);
             var rdr = DatabaseHelper.ExecuteQuery(orderQuery);
 
             DataTable orderTable = DatabaseHelper.GetTable("Orders");
@@ -128,11 +146,14 @@ namespace IPT_Milk_Company_UI
 
             foreach (ProductItem item in flw_Products.Controls)
             {
-                string query = string.Format("INSERT INTO [Order Details]([Order ID], [Product Name], Quantity) VALUES " +
-                    "({0},'{1}',{2})", orderID, item.comboBox2.SelectedItem.ToString(),  item.numericUpDown1.Value);
+                string query =
+                    string.Format(
+                        "INSERT INTO [Order Details]([Order ID], [Product Name], Quantity) VALUES " +
+                        "({0},'{1}', {2})", orderID, item.comboBox2.SelectedItem,
+                        item.numericUpDown1.Value);
                 OleDbDataReader reader = DatabaseHelper.ExecuteQuery(query);
             }
-            MessageBox.Show("Order Succesfully Added");
+            MessageBox.Show("Order Processed Succesfully");
         }
 
         protected override void Dispose(bool disposing)
@@ -154,6 +175,7 @@ namespace IPT_Milk_Company_UI
             this.lbl_totalPrice = new System.Windows.Forms.Label();
             this.flw_Products = new System.Windows.Forms.FlowLayoutPanel();
             this.btn_Place_Order = new System.Windows.Forms.Button();
+            this.cmb_Time = new System.Windows.Forms.ComboBox();
             this.SuspendLayout();
             // 
             // btn_addProduct
@@ -201,7 +223,7 @@ namespace IPT_Milk_Company_UI
             // 
             this.dtp_Order_Date.Location = new System.Drawing.Point(99, 91);
             this.dtp_Order_Date.Name = "dtp_Order_Date";
-            this.dtp_Order_Date.Size = new System.Drawing.Size(485, 20);
+            this.dtp_Order_Date.Size = new System.Drawing.Size(360, 20);
             this.dtp_Order_Date.TabIndex = 7;
             // 
             // label3
@@ -261,11 +283,24 @@ namespace IPT_Milk_Company_UI
             this.btn_Place_Order.UseVisualStyleBackColor = false;
             this.btn_Place_Order.Click += new System.EventHandler(this.btn_Place_Order_Click);
             // 
+            // cmb_Time
+            // 
+            this.cmb_Time.FormattingEnabled = true;
+            this.cmb_Time.Items.AddRange(new object[] {
+            "Anytime",
+            "Morning",
+            "Afternoon"});
+            this.cmb_Time.Location = new System.Drawing.Point(465, 91);
+            this.cmb_Time.Name = "cmb_Time";
+            this.cmb_Time.Size = new System.Drawing.Size(122, 21);
+            this.cmb_Time.TabIndex = 16;
+            // 
             // frm_AddOrder
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(610, 567);
+            this.Controls.Add(this.cmb_Time);
             this.Controls.Add(this.btn_Place_Order);
             this.Controls.Add(this.flw_Products);
             this.Controls.Add(this.lbl_totalPrice);
