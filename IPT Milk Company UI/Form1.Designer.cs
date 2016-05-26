@@ -28,17 +28,21 @@
         /// </summary>
         private void InitializeComponent()
         {
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle1 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle2 = new System.Windows.Forms.DataGridViewCellStyle();
             this.lbl_Subtext = new System.Windows.Forms.Label();
             this.metroTabControl1 = new MetroFramework.Controls.MetroTabControl();
             this.tab_Orders = new MetroFramework.Controls.MetroTabPage();
-            this.dataGridView1 = new System.Windows.Forms.DataGridView();
             this.btn_addOrder = new System.Windows.Forms.Button();
             this.button1 = new System.Windows.Forms.Button();
             this.button2 = new System.Windows.Forms.Button();
             this.btn_addFactory = new System.Windows.Forms.Button();
+            this.ordersView = new System.Windows.Forms.DataGridView();
+            this.panel1 = new System.Windows.Forms.Panel();
             this.metroTabControl1.SuspendLayout();
             this.tab_Orders.SuspendLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.dataGridView1)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.ordersView)).BeginInit();
+            this.panel1.SuspendLayout();
             this.SuspendLayout();
             // 
             // lbl_Subtext
@@ -61,7 +65,7 @@
             // 
             // tab_Orders
             // 
-            this.tab_Orders.Controls.Add(this.dataGridView1);
+            this.tab_Orders.Controls.Add(this.panel1);
             this.tab_Orders.HorizontalScrollbarBarColor = true;
             this.tab_Orders.HorizontalScrollbarHighlightOnWheel = false;
             this.tab_Orders.HorizontalScrollbarSize = 10;
@@ -74,15 +78,6 @@
             this.tab_Orders.VerticalScrollbarHighlightOnWheel = false;
             this.tab_Orders.VerticalScrollbarSize = 10;
             this.tab_Orders.Click += new System.EventHandler(this.tab_Orders_Click);
-            // 
-            // dataGridView1
-            // 
-            this.dataGridView1.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-            this.dataGridView1.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.dataGridView1.Location = new System.Drawing.Point(0, 0);
-            this.dataGridView1.Name = "dataGridView1";
-            this.dataGridView1.Size = new System.Drawing.Size(613, 249);
-            this.dataGridView1.TabIndex = 2;
             // 
             // btn_addOrder
             // 
@@ -131,6 +126,49 @@
             this.btn_addFactory.UseVisualStyleBackColor = true;
             this.btn_addFactory.Click += new System.EventHandler(this.btn_addFactory_Click);
             // 
+            // ordersView
+            // 
+            this.ordersView.AllowUserToAddRows = false;
+            this.ordersView.AllowUserToResizeRows = false;
+            this.ordersView.BackgroundColor = System.Drawing.Color.Black;
+            this.ordersView.BorderStyle = System.Windows.Forms.BorderStyle.None;
+            this.ordersView.ColumnHeadersBorderStyle = System.Windows.Forms.DataGridViewHeaderBorderStyle.Single;
+            dataGridViewCellStyle1.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleCenter;
+            dataGridViewCellStyle1.BackColor = System.Drawing.Color.Green;
+            dataGridViewCellStyle1.Font = new System.Drawing.Font("Segoe UI", 9F, System.Drawing.FontStyle.Bold);
+            dataGridViewCellStyle1.ForeColor = System.Drawing.SystemColors.WindowText;
+            dataGridViewCellStyle1.SelectionBackColor = System.Drawing.Color.Green;
+            dataGridViewCellStyle1.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
+            dataGridViewCellStyle1.WrapMode = System.Windows.Forms.DataGridViewTriState.True;
+            this.ordersView.ColumnHeadersDefaultCellStyle = dataGridViewCellStyle1;
+            this.ordersView.ColumnHeadersHeight = 25;
+            this.ordersView.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.DisableResizing;
+            dataGridViewCellStyle2.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
+            dataGridViewCellStyle2.BackColor = System.Drawing.SystemColors.Window;
+            dataGridViewCellStyle2.Font = new System.Drawing.Font("Segoe UI", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            dataGridViewCellStyle2.ForeColor = System.Drawing.Color.Black;
+            dataGridViewCellStyle2.SelectionBackColor = System.Drawing.Color.FromArgb(((int)(((byte)(255)))), ((int)(((byte)(128)))), ((int)(((byte)(0)))));
+            dataGridViewCellStyle2.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
+            dataGridViewCellStyle2.WrapMode = System.Windows.Forms.DataGridViewTriState.False;
+            this.ordersView.DefaultCellStyle = dataGridViewCellStyle2;
+            this.ordersView.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.ordersView.EnableHeadersVisualStyles = false;
+            this.ordersView.GridColor = System.Drawing.Color.Black;
+            this.ordersView.Location = new System.Drawing.Point(0, 0);
+            this.ordersView.Name = "ordersView";
+            this.ordersView.RowHeadersVisible = false;
+            this.ordersView.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
+            this.ordersView.Size = new System.Drawing.Size(613, 243);
+            this.ordersView.TabIndex = 3;
+            // 
+            // panel1
+            // 
+            this.panel1.Controls.Add(this.ordersView);
+            this.panel1.Location = new System.Drawing.Point(0, 3);
+            this.panel1.Name = "panel1";
+            this.panel1.Size = new System.Drawing.Size(613, 243);
+            this.panel1.TabIndex = 4;
+            // 
             // Form1
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -148,7 +186,8 @@
             this.Load += new System.EventHandler(this.Form1_Load);
             this.metroTabControl1.ResumeLayout(false);
             this.tab_Orders.ResumeLayout(false);
-            ((System.ComponentModel.ISupportInitialize)(this.dataGridView1)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.ordersView)).EndInit();
+            this.panel1.ResumeLayout(false);
             this.ResumeLayout(false);
 
         }
@@ -158,11 +197,12 @@
         private System.Windows.Forms.Label lbl_Subtext;
         private MetroFramework.Controls.MetroTabControl metroTabControl1;
         private MetroFramework.Controls.MetroTabPage tab_Orders;
-        private System.Windows.Forms.DataGridView dataGridView1;
         private System.Windows.Forms.Button btn_addOrder;
         private System.Windows.Forms.Button button1;
         private System.Windows.Forms.Button button2;
         private System.Windows.Forms.Button btn_addFactory;
+        private System.Windows.Forms.DataGridView ordersView;
+        private System.Windows.Forms.Panel panel1;
     }
 }
 

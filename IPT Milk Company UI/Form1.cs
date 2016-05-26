@@ -31,7 +31,7 @@ namespace IPT_Milk_Company_UI
         private void btn_addOrder_Click(object sender, EventArgs e)
         {
             new frm_AddOrder().Show();
-        } 
+        }
         private void button1_Click(object sender, EventArgs e)
         {
             new frm_AddProduct().Show();
@@ -42,10 +42,19 @@ namespace IPT_Milk_Company_UI
             new frm_AddFactory().Show();
         }
 
+        private void LoadOrders()
+        {
+            string query =
+                "SELECT [Order ID], [Order Date], [Required Date],  TruckPersonID.[First Name] & \" \" & TruckPersonID.[Last Name] AS [Serviced By], [Required], Person.[First Name] & \" \" & Person.[Last Name] AS [Truck Driver], [Sent Date] FROM (SELECT * FROM (SELECT * FROM (SELECT * FROM (SELECT * FROM  (SELECT * FROM Orders INNER JOIN (SELECT * FROM Dealer INNER JOIN Person ON Dealer.[Person ID] = Person.[Person ID]) DealerInformation ON Orders.[Dealer ID] = DealerInformation.[Dealer ID]) TruckID LEFT JOIN [Truck Driving Employee] ON TruckID.[Truck ID] = [Truck Driving Employee].[Truck ID]) TruckEmployeeID LEFT JOIN Employees ON TruckEmployeeID.[Employee ID] = Employees.[Employee ID]) TruckPersonID LEFT JOIN Person ON TruckPersonID.Employees.[Person ID] = Person.[Person ID]) ServicingPerson INNER JOIN Employees ON ServicingPerson.[Serviced Employee ID] = Employees.[Employee ID]) EmployeePerson LEFT JOIN Person ON EmployeePerson.ServicingPerson.Person.[Person ID] = Person.[Person ID]";
+            DataTable dtb = DatabaseHelper.GetTable(null, null, query);
+            ordersView.DataSource = dtb;
+        }
+
         private void Form1_Load(object sender, EventArgs e)
         {
-            
-        //    DatabaseHelper orderQuery = DatabaseHelper.ExecuteQuery(
+            LoadOrders();
+
+            //    DatabaseHelper orderQuery = DatabaseHelper.ExecuteQuery(
         }
 
         private void tab_Orders_Click(object sender, EventArgs e)
