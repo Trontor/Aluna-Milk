@@ -19,16 +19,12 @@ namespace IPT_Milk_Company_UI
         public Form1(int emp_ID)
         {
             InitializeComponent();
-            string executable = System.Reflection.Assembly.GetExecutingAssembly().Location;
-            string path = System.IO.Path.GetDirectoryName(executable);
-#if DEBUG
-            path = Directory.GetParent(Directory.GetParent(System.IO.Path.GetDirectoryName(executable)).ToString()).ToString();
-#endif 
-            AppDomain.CurrentDomain.SetData("DataDirectory", path);
+
             table_Employees = DatabaseHelper.GetTable("Employees");
             table_Persons = DatabaseHelper.GetTable("Person");
             person_Id = int.Parse(table_Employees.Rows[emp_ID - 1]["Person ID"].ToString());
-            string name = table_Persons.Rows[person_Id - 1]["First Name"].ToString();
+            LoggedInEmployee.ID = person_Id;
+            string name = DatabaseHelper.GetPerson(LoggedInEmployee.ID)["First Name"].ToString();//table_Persons.Rows[person_Id - 1]["First Name"].ToString();
             lbl_Subtext.Text = "Welcome " + name;
         }
 
@@ -48,6 +44,7 @@ namespace IPT_Milk_Company_UI
 
         private void Form1_Load(object sender, EventArgs e)
         {
+            
         //    DatabaseHelper orderQuery = DatabaseHelper.ExecuteQuery(
         }
 

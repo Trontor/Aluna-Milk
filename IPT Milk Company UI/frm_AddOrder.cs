@@ -79,13 +79,12 @@ namespace IPT_Milk_Company_UI
         private void frm_AddOrder_Load(object sender, EventArgs e)
         {
             cmb_Time.SelectedIndex = 0;
-            table = DatabaseHelper.GetTable("Dealer");
+            table = DatabaseHelper.GetTable(null,null,"SELECT [Dealer ID], [First Name], [Last Name], Company FROM Dealer INNER JOIN Person ON Dealer.[Person ID] = Person.[Person ID]");
             List<string> list = new List<string>();
             for (int index = 0; index < table.Rows.Count; ++index)
             {
-                DataRow person = DatabaseHelper.GetPerson(int.Parse(table.Rows[index]["Person ID"].ToString()));
-                string str1 = person["First Name"].ToString();
-                string str2 = person["Last Name"].ToString();
+                string str1 = table.Rows[index]["First Name"].ToString();
+                string str2 = table.Rows[index]["Last Name"].ToString();
                 string str3 = table.Rows[index]["Company"].ToString();
                 list.Add(str1 + " " + str2 + " (" + str3 + ")");
                 dealerDict.Add(list[index], int.Parse(table.Rows[index]["Dealer ID"].ToString()));
@@ -101,7 +100,7 @@ namespace IPT_Milk_Company_UI
 
         private void btn_Place_Order_Click(object sender, EventArgs e)
         {
-            DateTimePicker tempval = new DateTimePicker() {Value = dtp_Order_Date.Value};
+            DateTimePicker tempval = new DateTimePicker() { Value = dtp_Order_Date.Value };
             int hours = 0;
             switch (cmb_Time.SelectedIndex)
             {

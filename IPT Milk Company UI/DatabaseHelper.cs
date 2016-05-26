@@ -11,19 +11,39 @@ namespace IPT_Milk_Company_UI
 {
     static class DatabaseHelper
     {
+        static Dictionary<string, DataTable> dtables = new Dictionary<string, DataTable>();
+        public static void RefreshTables()
+        {
+            dtables.Clear();
+            OleDbConnection connection = new OleDbConnection(constr);
+            connection.Open();
+            Console.WriteLine("Information for each table contains:");
+            DataTable tables = connection.GetOleDbSchemaTable(OleDbSchemaGuid.Tables, new object[] { null, null, null, "TABLE" });
+
+            Console.WriteLine("The tables are:");
+            foreach (DataRow row in tables.Rows)
+            {
+                string tablename = row[2].ToString();
+                Console.WriteLine(tablename.ToString());
+                dtables.Add(tablename, GetTable(tablename, connection));
+            }
+
+        }
         public static int GetRowID(string table, string searchColumn, string idColumn, string value)
         {
-            foreach (DataRow row in DatabaseHelper.GetTable(table).Rows)
+            DataTable personTbl = GetTable(table);
+            foreach (DataRow row in personTbl.Rows)
             {
                 if (row[searchColumn].ToString() == value)
                     return int.Parse(row[idColumn].ToString());
             }
-            return -1; 
+            return -1;
         }
+        static string constr = @"Provider=Microsoft.ACE.OLEDB.12.0;Data Source=|DataDirectory|\Milk Database.accdb;
+Persist Security Info=False;";
         public static OleDbDataReader ExecuteQuery(string query)
         {
-            OleDbConnection connection = new OleDbConnection(@"Provider=Microsoft.ACE.OLEDB.12.0;Data Source=|DataDirectory|\Milk Database.accdb;
-Persist Security Info=False;");
+            OleDbConnection connection = new OleDbConnection(constr);
             connection.Open();
             OleDbCommand command = new OleDbCommand(query, connection); Debug.WriteLine(query);
             OleDbDataReader reader = command.ExecuteReader();
@@ -31,9 +51,22 @@ Persist Security Info=False;");
             return reader;
         }
 
+        public static int GetTableIndex(DataTable tbl, string columnName, int value)
+        {
+            for (int i = 0; i < tbl.Rows.Count - 1; i++)
+            {
+                DataRow row = tbl.Rows[i];
+                if (row[columnName].ToString() == value.ToString())
+                {
+                    return i;
+                }
+            }
+            return -1;
+        }
         public static DataRow GetPerson(int personID)
         {
-            return GetTable("Person").Rows[personID - 1];
+            int rowid = GetRowID("Person", "Person ID", "Person ID", personID.ToString());
+            return GetTable("Person").Rows[GetTableIndex(GetTable("Person"), "Person ID", rowid)];
         }
 
         public static List<string> GetColumnItems(string tablename, string columnname)
@@ -50,17 +83,29 @@ Persist Security Info=False;");
             return items;
         }
 
-        public static DataTable GetTable(string tablename)
+        public static DataTable GetTable(string tablename, OleDbConnection con = null, string customQuery = "")
         {
+            if (!string.IsNullOrEmpty(tablename) && dtables.ContainsKey(tablename))
+                return dtables[tablename];
+            if (con == null)
+            {
+                con = new OleDbConnection(constr);
+                con.Open();
+
+            }
+            else
+            {
+                Debug.WriteLine("XD");
+            }
             DataTable dataTable = new DataTable();
             try
             {
-                OleDbConnection connection =
-                    new OleDbConnection(
-                        @"Provider=Microsoft.ACE.OLEDB.12.0;Data Source=|DataDirectory|\Milk Database.accdb;
-Persist Security Info=False;");
-                connection.Open();
-                OleDbDataAdapter dAdapter = new OleDbDataAdapter("select * from " + tablename, connection);
+                string query;
+                if (string.IsNullOrEmpty(customQuery))
+                    query = ("select * from [" + tablename + "]");
+                else query = customQuery;
+                OleDbDataAdapter dAdapter = new OleDbDataAdapter(query, con);
+
                 dAdapter.Fill(dataTable);
 
                 //foreach (DataRow s in dataTable.Rows)
@@ -71,7 +116,7 @@ Persist Security Info=False;");
 
                 //    }
                 //}
-                connection.Close();
+                con.Close();
             }
             catch (Exception ex)
             {
@@ -88,8 +133,7 @@ Persist Security Info=False;");
                 List<Milk_DatabaseDataSet.ProductsDataTable> item = new List<Milk_DatabaseDataSet.ProductsDataTable>();
                 productsTable.Rows.Clear();
 
-                OleDbConnection connection = new OleDbConnection(@"Provider=Microsoft.ACE.OLEDB.12.0;Data Source=|DataDirectory|\Milk Database.accdb;
-Persist Security Info=False;");
+                OleDbConnection connection = new OleDbConnection(constr);
                 connection.Open();
                 string queryString = "SELECT * FROM Products";
                 OleDbCommand command = new OleDbCommand(queryString, connection);

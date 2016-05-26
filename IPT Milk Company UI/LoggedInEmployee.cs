@@ -10,7 +10,7 @@ namespace IPT_Milk_Company_UI
     {
         public static int ID = -1;
         public static DataRow EmployeeInformation()
-        {
+        { 
             return DatabaseHelper.GetPerson(ID);
         }
     }

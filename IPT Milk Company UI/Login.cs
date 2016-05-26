@@ -48,6 +48,7 @@ namespace IPT_Milk_Company_UI
 
         private void Proceed()
         {
+            DatabaseHelper.RefreshTables();
             this.Hide();
             var form2 = new Form1(Employee_ID);
             form2.Closed += (s, args) => this.Close();
