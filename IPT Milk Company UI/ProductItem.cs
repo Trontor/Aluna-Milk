@@ -17,6 +17,7 @@ namespace IPT_Milk_Company_UI
         public ProductItem()
         {
             InitializeComponent();
+            LoadProductList();
         }
         DataTable table = new DataTable();
         private void LoadProductList()
@@ -30,7 +31,6 @@ namespace IPT_Milk_Company_UI
         }
         private void ProductItem_Load(object sender, EventArgs e)
         {
-            LoadProductList();
         }
 
         public double totalPrice = 0;

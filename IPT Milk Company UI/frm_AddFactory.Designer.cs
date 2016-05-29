@@ -132,6 +132,7 @@
             this.cmb_Office.Name = "cmb_Office";
             this.cmb_Office.Size = new System.Drawing.Size(152, 21);
             this.cmb_Office.TabIndex = 24;
+            this.cmb_Office.SelectedIndexChanged += new System.EventHandler(this.cmb_Office_SelectedIndexChanged);
             // 
             // label1
             // 

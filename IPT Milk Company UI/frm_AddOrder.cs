@@ -9,10 +9,14 @@ using System.Collections.Generic;
 using System.ComponentModel;
 using System.Data;
 using System.Data.OleDb;
+using System.Collections.Generic;
+using System.Linq;
 using System.Drawing;
 using System.Windows.Forms;
 using System.Windows.Forms.Layout;
 using MetroFramework.Forms;
+using System.Diagnostics;
+using System.IO;
 
 namespace IPT_Milk_Company_UI
 {
@@ -31,9 +35,14 @@ namespace IPT_Milk_Company_UI
         private ComboBox cmb_Time;
         private Button btn_Place_Order;
 
-        public frm_AddOrder()
+        int orderID = -1;
+
+        DataGridViewRow updateRow = null;
+        public frm_AddOrder(int orderID = -1, DataGridViewRow queryRow = null)
         {
             this.InitializeComponent();
+            this.orderID = orderID;
+            updateRow = queryRow;
             this.flw_Products.AutoScroll = false;
             this.flw_Products.HorizontalScroll.Enabled = false;
             this.flw_Products.AutoScroll = true;
@@ -52,6 +61,12 @@ namespace IPT_Milk_Company_UI
 
         private void btn_addProduct_Click(object sender, EventArgs e)
         {
+            AddProduct();
+        }
+
+        private void AddProduct(string productname = "", int defaultQuantity = 1)
+        {
+
             ProductItem product = new ProductItem();
             product.numericUpDown1.ValueChanged += (EventHandler)((u, d) => this.UpdatePrice());
             product.btn_removeProduct.Click += (EventHandler)((z, y) =>
@@ -60,6 +75,14 @@ namespace IPT_Milk_Company_UI
                     this.flw_Products.Controls.Remove((Control)product);
                 this.UpdatePrice();
             });
+            if (productname != "")
+            {
+                if (product.comboBox2.Items.Contains(productname))
+                {
+                    product.comboBox2.SelectedItem = productname;
+                }
+            }
+            product.numericUpDown1.Value = defaultQuantity;
             this.flw_Products.Controls.Add((Control)product);
         }
 
@@ -76,10 +99,11 @@ namespace IPT_Milk_Company_UI
             e.Control.Width = this.flw_Products.ClientSize.Width;
         }
 
+        Dictionary<string, int> dealerDict = new Dictionary<string, int>();
         private void frm_AddOrder_Load(object sender, EventArgs e)
         {
             cmb_Time.SelectedIndex = 0;
-            table = DatabaseHelper.GetTable(null,null,"SELECT [Dealer ID], [First Name], [Last Name], Company FROM Dealer INNER JOIN Person ON Dealer.[Person ID] = Person.[Person ID]");
+            table = DatabaseHelper.GetTable(null, null, "SELECT [Dealer ID], [First Name], [Last Name], Company FROM Dealer INNER JOIN Person ON Dealer.[Person ID] = Person.[Person ID]");
             List<string> list = new List<string>();
             for (int index = 0; index < table.Rows.Count; ++index)
             {
@@ -89,9 +113,48 @@ namespace IPT_Milk_Company_UI
                 list.Add(str1 + " " + str2 + " (" + str3 + ")");
                 dealerDict.Add(list[index], int.Parse(table.Rows[index]["Dealer ID"].ToString()));
             }
-            this.cmb_Dealer.DataSource = (object)list;
+            this.cmb_Dealer.DataSource = list;
             DataRow dataRow = LoggedInEmployee.EmployeeInformation();
             this.lbl_servicedEmployee.Text = dataRow["First Name"].ToString() + " " + dataRow["Last Name"].ToString() + " (You)";
+            if (orderID >= 0)
+            {
+                Text = "Updating Order #" + orderID;
+                btn_Place_Order.Text = "Update Order";
+                if (updateRow == null)
+                {
+                    MessageBox.Show("Lol u need a queery row tho");
+                    return;
+                }
+
+                string dealerValue = dealerDict.FirstOrDefault(x =>
+                {
+                    string name = updateRow.Cells["Dealer Name"].Value.ToString();
+                    string company = updateRow.Cells["Company"].Value.ToString();
+                    return x.Key.Contains(name) && x.Key.Contains(company);
+                }
+                ).Key;
+                if (dealerValue != null && cmb_Dealer.Items.Contains(dealerValue))
+                    cmb_Dealer.SelectedItem = dealerValue;
+
+                cmb_Time.SelectedItem = updateRow.Cells["Required"].Value.ToString();
+                string lastUpdatedBy = updateRow.Cells["Last Updated By"].Value.ToString();
+                if (!string.IsNullOrEmpty(lastUpdatedBy))
+                {
+                    DataRow lastUpdatedPersonRow = DatabaseHelper.GetPerson(int.Parse(lastUpdatedBy));
+                    string Name = lastUpdatedPersonRow["First Name"].ToString() + " " + lastUpdatedPersonRow["Last Name"].ToString();
+                    if (!string.IsNullOrEmpty(lastUpdatedBy))
+                        lbl_servicedEmployee.Text += " // Last Updated by " + Name;
+                }
+                foreach (DataRow detailRow in DatabaseHelper.GetTable("Order Details").Rows)
+                {
+                    if (detailRow["Order ID"].ToString() == orderID.ToString())
+                    {
+                        string productName = detailRow["Product Name"].ToString();
+                        int Quantity = int.Parse(detailRow["Quantity"].ToString());
+                        AddProduct(productName, Quantity);
+                    }
+                }
+            }
         }
 
         private void flw_Products_ControlRemoved(object sender, ControlEventArgs e)
@@ -123,7 +186,6 @@ namespace IPT_Milk_Company_UI
         }
 
         private DataTable table = new DataTable();
-        Dictionary<string, int> dealerDict = new Dictionary<string, int>();
         private void PlaceOrder()
         {
             //Create entry in Orders table
@@ -133,7 +195,12 @@ namespace IPT_Milk_Company_UI
             this.lbl_servicedEmployee.Text = dataRow["First Name"].ToString() + " " + dataRow["Last Name"].ToString() + " (You)";
             int dealerID = dealerDict[cmb_Dealer.SelectedItem.ToString()];
 
-            string orderQuery =
+            string orderQuery = "";
+            if (btn_Place_Order.Text.Contains("Update"))
+                orderQuery = string.Format("UPDATE Orders SET [Dealer ID]={0}, [Order Date]=#{1}#, [Required Date]=#{2}#, [Required Time]={3}, [Last Updated By]={4} WHERE [Order ID] = {5}",
+                    dealerID, orderDate, dtp_Order_Date.Value.Date, cmb_Time.SelectedIndex, empID, this.orderID);
+            else
+                orderQuery =
                 string.Format("INSERT INTO Orders([Dealer ID],[Order Date], [Serviced Employee ID], [Required Date],[Required Time]) VALUES ({0},#{1}#,{2},#{3}#,{4})",
                     dealerID, orderDate, empID, dtp_Order_Date.Value.Date, cmb_Time.SelectedIndex);
             var rdr = DatabaseHelper.ExecuteQuery(orderQuery);
@@ -141,16 +208,50 @@ namespace IPT_Milk_Company_UI
             DataTable orderTable = DatabaseHelper.GetTable("Orders");
 
             DataTable productTable = DatabaseHelper.GetTable("Products");
-            int orderID = int.Parse(orderTable.Rows[orderTable.Rows.Count - 1]["Order ID"].ToString());
+            int orderID = -1;
+            if (btn_Place_Order.Text.Contains("Update"))
+                orderID = this.orderID;
+            else orderID = int.Parse(orderTable.Rows[orderTable.Rows.Count - 1]["Order ID"].ToString());
 
+            List<string> productNames = new List<string>();
             foreach (ProductItem item in flw_Products.Controls)
             {
-                string query =
-                    string.Format(
-                        "INSERT INTO [Order Details]([Order ID], [Product Name], Quantity) VALUES " +
-                        "({0},'{1}', {2})", orderID, item.comboBox2.SelectedItem,
-                        item.numericUpDown1.Value);
+                string query = "";
+                if (btn_Place_Order.Text.Contains("Update"))
+                {
+                    DataTable tableCurrentProducts = DatabaseHelper.GetTable(null, null, "SELECT [Product Name] FROM [Order Details] WHERE [Order ID]=" + orderID);
+                    List<string> productItemsKappaPride = new List<string>();
+                    foreach (DataRow rowowoow in tableCurrentProducts.Rows)
+                    {
+                        productItemsKappaPride.Add(rowowoow["Product Name"].ToString());
+                    }
+                    if (!productItemsKappaPride.Contains(item.comboBox2.SelectedItem))
+                        query = string.Format(
+                             "INSERT INTO [Order Details]([Order ID], [Product Name], Quantity) VALUES " +
+                             "({0},'{1}', {2})", orderID, item.comboBox2.SelectedItem,
+                             item.numericUpDown1.Value);
+                    else
+                        query = string.Format("UPDATE [Order Details] SET [Quantity]={0} WHERE [Order ID]={1} AND [Product Name]='{2}'",
+                            item.numericUpDown1.Value, orderID, item.comboBox2.SelectedItem);
+                }
+                else
+                    query =
+                         string.Format(
+                             "INSERT INTO [Order Details]([Order ID], [Product Name], Quantity) VALUES " +
+                             "({0},'{1}', {2})", orderID, item.comboBox2.SelectedItem,
+                             item.numericUpDown1.Value);
                 OleDbDataReader reader = DatabaseHelper.ExecuteQuery(query);
+                productNames.Add(item.comboBox2.SelectedItem.ToString());
+            }
+            string querya = "SELECT * FROM [Order Details] WHERE [Order ID]=" + orderID;
+            DataTable dtb = DatabaseHelper.GetTable(null, null, querya);
+            foreach (DataRow productRow in dtb.Rows)
+            {
+                string productName = productRow["Product Name"].ToString();
+                if (!productNames.Contains(productName))
+                {
+                    DatabaseHelper.ExecuteQuery("DELETE FROM [Order Details] WHERE [OrderDetails ID] =" + productRow["OrderDetails ID"].ToString());
+                }
             }
             MessageBox.Show("Order Processed Succesfully");
         }

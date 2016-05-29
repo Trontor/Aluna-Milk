@@ -42,24 +42,142 @@ namespace IPT_Milk_Company_UI
             new frm_AddFactory().Show();
         }
 
-        private void LoadOrders()
+        private string NormalizeDate(DateTime endDate)
         {
-            string query =
-                "SELECT [Order ID], [Order Date], [Required Date],  TruckPersonID.[First Name] & \" \" & TruckPersonID.[Last Name] AS [Serviced By], [Required], Person.[First Name] & \" \" & Person.[Last Name] AS [Truck Driver], [Sent Date] FROM (SELECT * FROM (SELECT * FROM (SELECT * FROM (SELECT * FROM  (SELECT * FROM Orders INNER JOIN (SELECT * FROM Dealer INNER JOIN Person ON Dealer.[Person ID] = Person.[Person ID]) DealerInformation ON Orders.[Dealer ID] = DealerInformation.[Dealer ID]) TruckID LEFT JOIN [Truck Driving Employee] ON TruckID.[Truck ID] = [Truck Driving Employee].[Truck ID]) TruckEmployeeID LEFT JOIN Employees ON TruckEmployeeID.[Employee ID] = Employees.[Employee ID]) TruckPersonID LEFT JOIN Person ON TruckPersonID.Employees.[Person ID] = Person.[Person ID]) ServicingPerson INNER JOIN Employees ON ServicingPerson.[Serviced Employee ID] = Employees.[Employee ID]) EmployeePerson LEFT JOIN Person ON EmployeePerson.ServicingPerson.Person.[Person ID] = Person.[Person ID]";
-            DataTable dtb = DatabaseHelper.GetTable(null, null, query);
-            ordersView.DataSource = dtb;
+            var totalDays = (DateTime.Now - endDate).TotalDays;
+            var totalYears = Math.Truncate(totalDays / 365);
+            var totalMonths = Math.Truncate((totalDays % 365) / 30);
+            var remainingDays = Math.Truncate((totalDays % 365) % 30);
+            string dstr = "";
+            if (totalYears > 0)
+            {
+                dstr = totalYears.ToString() + " year ago.";
+            }
+            else if (totalMonths > 0)
+            {
+                dstr = totalMonths.ToString() + " month ago.";
+            }
+            else if (remainingDays == 0)
+            {
+                dstr = "Today";
+            }
+            else if (remainingDays == 1)
+            {
+                dstr = "Yesterday";
+            }
+            else if (remainingDays > 0)
+                dstr = remainingDays.ToString() + " day" + (remainingDays > 1 ? "s" : "") + " ago.";
+            return dstr;
+
         }
 
+        private void LoadOrders()
+        {
+            string query = "SELECT [Order ID], [Last Updated By], [Order Date], Person.[First Name] & \" \" & Person.[Last Name] AS [Servicer],[Required Date],  TruckPersonID.[First Name] & \" \" & TruckPersonID.[Last Name] AS [Dealer Name], [Company],  [Required Time] as [Required], lmao.Person.[First Name] & \" \" & lmao.Person.[Last Name] AS [Truck Driver], [Sent Date]  FROM (SELECT * FROM (SELECT * FROM (SELECT * FROM (SELECT * FROM (SELECT * FROM  (SELECT * FROM Orders INNER JOIN (SELECT * FROM Dealer INNER JOIN Person ON Dealer.[Person ID] = Person.[Person ID]) DealerInformation ON Orders.[Dealer ID] = DealerInformation.[Dealer ID]) TruckID LEFT JOIN [Truck Drivers] ON TruckID.[Truck ID] = [Truck Drivers].[Truck ID]) TruckEmployeeID LEFT JOIN Employees ON TruckEmployeeID.[Employee ID] = Employees.[Employee ID]) TruckPersonID LEFT JOIN Person ON TruckPersonID.Employees.[Person ID] = Person.[Person ID]) ServicingPerson LEFT JOIN Employees ON ServicingPerson.[Serviced Employee ID] = Employees.[Employee ID]) EmployeePerson LEFT JOIN Person ON EmployeePerson.ServicingPerson.Person.[Person ID] = Person.[Person ID]) lmao LEFT JOIN Person ON lmao.EmployeePerson.Employees.[Person ID] = Person.[Person ID]";
+            DataTable dtb = DatabaseHelper.GetTable(null, null, query);
+            DataTable clone = dtb.Clone();
+            clone.Columns["Sent Date"].DataType = typeof(string);
+            clone.Columns["Order Date"].DataType = typeof(string);
+            clone.Columns["Required"].DataType = typeof(string);
+            ordersView.DataSource = clone;
+            foreach (DataRow row in dtb.Rows)
+            {
+                clone.ImportRow(row);
+            }
+            for (int i = 0; i < clone.Rows.Count; i++)
+            {
+                string str = "";
+                DataRow row = clone.Rows[i];
+                DateTime time = DateTime.Parse(row["Order Date"].ToString());
+                if (ordersView.Rows[i].Cells["Sent Date"].Value.ToString() == "")
+                {
+                    //    DataGridViewCellStyle style = new DataGridViewCellStyle();
+                    //    style.BackColor = Color.FromArgb(255, 238, 118);
+                    //    style.SelectionBackColor = style.BackColor;
+                    //    ordersView.Rows[i].Cells["Sent Date"].Style = style;
+                    ordersView.Rows[i].Cells["Sent Date"].Value = "Not Sent";
+                }
+                ordersView.Rows[i].Cells["Order Date"].Value = NormalizeDate(time);
+                ordersView.Rows[i].Cells["Order Date"].ToolTipText = time.ToString();
+                switch (row["Required"].ToString())
+                {
+                    case "0":
+                        str = "Anytime";
+                        break;
+                    case "1":
+                        str = "Morning";
+                        break;
+                    case "2":
+                        str = "Afternoon";
+                        break;
+                }
+                ordersView.Rows[i].Cells["Required"].ToolTipText = row["Required"].ToString();
+                clone.Rows[i]["Required"] = str;
+            }
+
+            ordersView.Columns["Last Updated By"].Visible = false;
+            ordersView.Columns["Order ID"].Visible = false;
+            ordersView.AutoSizeColumnsMode = DataGridViewAutoSizeColumnsMode.Fill;
+            ordersView.AutoResizeColumns();
+        }
+
+        private void LoadEmployees()
+        {
+            string query = "SELECT [First Name], [Last Name], [Date of Birth], [EmpPos] FROM Employees INNER JOIN Person ON Employees.[Person ID] = Person.[Person ID]";
+            DataTable dtb = DatabaseHelper.GetTable(null, null, query);
+            //DataTable clone = new DataTable();
+            //clone.Columns.Add("Age");
+            //foreach (DataRow row in dtb.Rows)
+            //{
+            //    clone.ImportRow(row);
+            //    clone.Rows[clone.Rows.Count - 1]["Age"] = (DateTime.Now-DateTime.Parse(clone.Rows[clone.Rows.Count-1]["Date of Birth"].ToString())).TotalDays.ToString();
+            //}
+            //for (int i = 0; i < clone.Rows.Count; i++)
+            //{
+
+            //}
+                employeesView.DataSource = dtb;
+            ordersView.AutoResizeColumns();
+        }
         private void Form1_Load(object sender, EventArgs e)
         {
             LoadOrders();
+            LoadEmployees();
 
             //    DatabaseHelper orderQuery = DatabaseHelper.ExecuteQuery(
         }
 
-        private void tab_Orders_Click(object sender, EventArgs e)
+        private void ordersView_MouseClick(object sender, MouseEventArgs e)
         {
+            if (e.Button == MouseButtons.Right)
+            {
+                ContextMenu m = new ContextMenu();
+                MenuItem viewOrders = new MenuItem("View Order");
+                viewOrders.Click += (z, y) =>
+                {
+                    new frm_AddOrder(int.Parse(ordersView.Rows[ordersView.HitTest(e.X, e.Y).RowIndex].Cells["Order ID"].Value.ToString()), ordersView.Rows[ordersView.HitTest(e.X, e.Y).RowIndex]).ShowDialog();
+                };
+                MenuItem deleteOrder = new MenuItem("Delete Order");
+                int currentMouseOverRow = ordersView.HitTest(e.X, e.Y).RowIndex;
+                deleteOrder.Click += (a, f) =>
+                  {
+                      if (MessageBox.Show("Are you sure you want to delete the order for " + ordersView.Rows[currentMouseOverRow].Cells["Dealer Name"].Value.ToString())== DialogResult.OK)
+                      {
+                          DatabaseHelper.DeleteRow("Orders", "Order ID", ordersView.Rows[currentMouseOverRow].Cells["Order ID"].Value.ToString());
+                      }
+                  };
+                m.MenuItems.Add(viewOrders);
+                m.MenuItems.Add(deleteOrder);
 
+                ordersView.Rows[currentMouseOverRow].Selected = true;
+                m.Show(ordersView, new Point(e.X, e.Y));
+
+            }
+        }
+
+        private void btn_addEmployee_Click(object sender, EventArgs e)
+        {
+            new frm_AddEmployee().ShowDialog();
         }
     }
 }

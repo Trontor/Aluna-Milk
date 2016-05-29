@@ -35,7 +35,6 @@ namespace IPT_Milk_Company_UI
             Clipboard.SetText(query);
             OleDbDataReader reader = DatabaseHelper.ExecuteQuery(query);
             MessageBox.Show("Query succesfully processed. " + reader.RecordsAffected + " records inserted.");
-
         }
 
         private void btn_addProduct_Click(object sender, EventArgs e)
@@ -100,6 +99,10 @@ namespace IPT_Milk_Company_UI
             frm.ShowDialog();
             officeID = frm.officeID;
             UpdateFields();
+        }
+
+        private void cmb_Office_SelectedIndexChanged(object sender, EventArgs e)
+        {
 
         }
     }

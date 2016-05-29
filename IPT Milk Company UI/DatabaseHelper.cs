@@ -4,6 +4,7 @@ using System.Data;
 using System.Data.OleDb;
 using System.Diagnostics;
 using System.Linq;
+using System.Security.Cryptography;
 using System.Text;
 using System.Windows.Forms;
 
@@ -12,26 +13,34 @@ namespace IPT_Milk_Company_UI
     static class DatabaseHelper
     {
         static Dictionary<string, DataTable> dtables = new Dictionary<string, DataTable>();
-        public static void RefreshTables()
+
+        static DateTime lastRefreshed = DateTime.MinValue;
+        public static void RefreshTables(bool overrideCheck = false)
         {
-            dtables.Clear();
-            OleDbConnection connection = new OleDbConnection(constr);
-            connection.Open();
-            Console.WriteLine("Information for each table contains:");
-            DataTable tables = connection.GetOleDbSchemaTable(OleDbSchemaGuid.Tables, new object[] { null, null, null, "TABLE" });
-
-            Console.WriteLine("The tables are:");
-            foreach (DataRow row in tables.Rows)
+            if (overrideCheck || (DateTime.Now - lastRefreshed).Seconds > 10)
             {
-                string tablename = row[2].ToString();
-                Console.WriteLine(tablename.ToString());
-                dtables.Add(tablename, GetTable(tablename, connection));
-            }
+                dtables.Clear();
+                OleDbConnection connection = new OleDbConnection(constr);
+                connection.Open();
+                Console.WriteLine("Information for each table contains:");
+                DataTable tables = connection.GetOleDbSchemaTable(OleDbSchemaGuid.Tables, new object[] { null, null, null, "TABLE" });
 
+                Console.WriteLine("The tables are:");
+                foreach (DataRow row in tables.Rows)
+                {
+                    string tablename = row[2].ToString();
+                    Console.WriteLine(tablename.ToString());
+                    dtables.Add(tablename, GetTable(tablename, connection));
+                }
+
+                lastRefreshed = DateTime.Now;
+            }
+            else
+                Debug.WriteLine("There has been {0} seconds before the last refresh, we've skipped it this time.", (DateTime.Now - lastRefreshed).Seconds);
         }
         public static int GetRowID(string table, string searchColumn, string idColumn, string value)
         {
-            DataTable personTbl = GetTable(table);
+            DataTable personTbl = GetTable(table, null, null, true);
             foreach (DataRow row in personTbl.Rows)
             {
                 if (row[searchColumn].ToString() == value)
@@ -40,9 +49,10 @@ namespace IPT_Milk_Company_UI
             return -1;
         }
         static string constr = @"Provider=Microsoft.ACE.OLEDB.12.0;Data Source=|DataDirectory|\Milk Database.accdb;
-Persist Security Info=False;";
+Persist Security Info=False;";  
         public static OleDbDataReader ExecuteQuery(string query)
         {
+            RefreshTables();
             OleDbConnection connection = new OleDbConnection(constr);
             connection.Open();
             OleDbCommand command = new OleDbCommand(query, connection); Debug.WriteLine(query);
@@ -53,7 +63,7 @@ Persist Security Info=False;";
 
         public static int GetTableIndex(DataTable tbl, string columnName, int value)
         {
-            for (int i = 0; i < tbl.Rows.Count - 1; i++)
+            for (int i = 0; i <= tbl.Rows.Count - 1; i++)
             {
                 DataRow row = tbl.Rows[i];
                 if (row[columnName].ToString() == value.ToString())
@@ -62,6 +72,11 @@ Persist Security Info=False;";
                 }
             }
             return -1;
+        }
+        public static OleDbDataReader DeleteRow(string tablename, string primaryName, string primaryValue)
+        {
+            return ExecuteQuery("DELETE FROM [" + tablename + "] WHERE [" + primaryName + "]=" + primaryValue);
+            
         }
         public static DataRow GetPerson(int personID)
         {
@@ -83,9 +98,38 @@ Persist Security Info=False;";
             return items;
         }
 
-        public static DataTable GetTable(string tablename, OleDbConnection con = null, string customQuery = "")
+
+        public static string CalculateMD5Hash(string input)
+
         {
-            if (!string.IsNullOrEmpty(tablename) && dtables.ContainsKey(tablename))
+
+            // step 1, calculate MD5 hash from input
+
+            MD5 md5 = System.Security.Cryptography.MD5.Create();
+
+            byte[] inputBytes = System.Text.Encoding.ASCII.GetBytes(input);
+
+            byte[] hash = md5.ComputeHash(inputBytes);
+
+            // step 2, convert byte array to hex string
+
+            StringBuilder sb = new StringBuilder();
+
+            for (int i = 0; i < hash.Length; i++)
+
+            {
+
+                sb.Append(hash[i].ToString("x2"));
+
+            }
+
+            return sb.ToString();
+
+        }
+
+        public static DataTable GetTable(string tablename, OleDbConnection con = null, string customQuery = "", bool bypassCache = false)
+        {
+            if (!string.IsNullOrEmpty(tablename) && dtables.ContainsKey(tablename) && !bypassCache)
                 return dtables[tablename];
             if (con == null)
             {
@@ -104,6 +148,7 @@ Persist Security Info=False;";
                 if (string.IsNullOrEmpty(customQuery))
                     query = ("select * from [" + tablename + "]");
                 else query = customQuery;
+                Debug.WriteLine(query);
                 OleDbDataAdapter dAdapter = new OleDbDataAdapter(query, con);
 
                 dAdapter.Fill(dataTable);

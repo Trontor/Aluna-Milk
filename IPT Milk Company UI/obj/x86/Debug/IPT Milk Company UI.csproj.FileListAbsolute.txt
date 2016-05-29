@@ -71,7 +71,6 @@ C:\Users\rjoshi1\Source\Repos\Aluna-Milk\IPT Milk Company UI\bin\Debug\IPT Milk 
 C:\Users\rjoshi1\Source\Repos\Aluna-Milk\IPT Milk Company UI\bin\Debug\IPT Milk Company UI.pdb
 C:\Users\rjoshi1\Source\Repos\Aluna-Milk\IPT Milk Company UI\bin\Debug\MetroFramework.dll
 C:\Users\rjoshi1\Source\Repos\Aluna-Milk\IPT Milk Company UI\bin\Debug\MetroFramework.Fonts.dll
-C:\Users\rjoshi1\Source\Repos\Aluna-Milk\IPT Milk Company UI\obj\x86\Debug\IPT Milk Company UI.csprojResolveAssemblyReference.cache
 C:\Users\rjoshi1\Source\Repos\Aluna-Milk\IPT Milk Company UI\obj\x86\Debug\IPT_Milk_Company_UI.Form1.resources
 C:\Users\rjoshi1\Source\Repos\Aluna-Milk\IPT Milk Company UI\obj\x86\Debug\IPT_Milk_Company_UI.frm_AddOffice.resources
 C:\Users\rjoshi1\Source\Repos\Aluna-Milk\IPT Milk Company UI\obj\x86\Debug\IPT_Milk_Company_UI.frm_AddFactory.resources
@@ -119,3 +118,5 @@ D:\Aluna-Milk\IPT Milk Company UI\obj\x86\Debug\GenerateResource.read.1.tlog
 D:\Aluna-Milk\IPT Milk Company UI\obj\x86\Debug\GenerateResource.write.1.tlog
 D:\Aluna-Milk\IPT Milk Company UI\obj\x86\Debug\IPT Milk Company UI.exe
 C:\Users\Rohyl Joshi\Source\Repos\Aluna-Milk\IPT Milk Company UI\obj\x86\Debug\IPT Milk Company UI.csprojResolveAssemblyReference.cache
+C:\Users\rjoshi1\Source\Repos\Aluna-Milk\IPT Milk Company UI\obj\x86\Debug\IPT_Milk_Company_UI.frm_AddEmployee.resources
+C:\Users\rjoshi1\Source\Repos\Aluna-Milk\IPT Milk Company UI\obj\x86\Debug\IPT Milk Company UI.csprojResolveAssemblyReference.cache

@@ -9,38 +9,12 @@ using System.Text;
 using System.Windows.Forms;
 using IPT_Milk_Company_UI;
 using MetroFramework.Forms;
+using System.Diagnostics;
 
 namespace IPT_Milk_Company_UI
 {
     public partial class Login : MetroForm
     {
-        public string CalculateMD5Hash(string input)
-
-        {
-
-            // step 1, calculate MD5 hash from input
-
-            MD5 md5 = System.Security.Cryptography.MD5.Create();
-
-            byte[] inputBytes = System.Text.Encoding.ASCII.GetBytes(input);
-
-            byte[] hash = md5.ComputeHash(inputBytes);
-
-            // step 2, convert byte array to hex string
-
-            StringBuilder sb = new StringBuilder();
-
-            for (int i = 0; i < hash.Length; i++)
-
-            {
-
-                sb.Append(hash[i].ToString("x2"));
-
-            }
-
-            return sb.ToString();
-
-        }
         public Login()
         {
             InitializeComponent();
@@ -63,6 +37,7 @@ namespace IPT_Milk_Company_UI
         private int Employee_ID = -1;
         private void ValidateLogin()
         {
+                        Debug.WriteLine(DatabaseHelper.CalculateMD5Hash(txt_Password.Text));
 
             bool loggedIn = false;
             ValidityChecker checker = new ValidityChecker(txt_Password, txt_Username);
@@ -74,7 +49,8 @@ namespace IPT_Milk_Company_UI
                 {
                     if (item != null && item["PC Username"].ToString() == txt_Username.Text)
                     {
-                        string MD5hash = CalculateMD5Hash(txt_Password.Text);
+                        string MD5hash = DatabaseHelper.CalculateMD5Hash(txt_Password.Text);
+                        Debug.WriteLine(MD5hash);
                         if (MD5hash == item["PC Password MD5"].ToString())
                         {
                             Employee_ID = int.Parse(item["Employee ID"].ToString());
@@ -97,7 +73,7 @@ namespace IPT_Milk_Company_UI
         {
             txt_Username.Focus();
 #if DEBUG
-            txt_Username.Text = "rohyl";
+            txt_Username.Text = "rjoshi";
             txt_Password.Text = "PASSWORD";
             //ValidateLogin();
 #endif
