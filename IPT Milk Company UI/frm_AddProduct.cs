@@ -54,7 +54,7 @@ namespace IPT_Milk_Company_UI
             string filename = Path.Combine("Aluna Product Images", this.txt_Product_Name.Text + ".bmp");
             Image.FromFile(this.imagePath).Save(Path.Combine(Application.StartupPath, filename));
             this.imagePath = filename;
-            string str = string.Format("INSERT INTO Products([Product Name], [Factory ID], ImagePath, Description, [Last Updated], Price) VALUES ('{0}','{1}','{2}','{3}',#{4}#,{5})",
+            string str = string.Format("INSERT INTO Products([Product Name], [Factory ID], ImagePath, Description, [Last Updated], Price) VALUES ('{0}','{1}','{2}',\"{3}\",#{4}#,{5})",
                txt_Product_Name.Text, DatabaseHelper.GetRowID("Factory", "Factory Name", "Factory ID", cmb_Factory_Name.SelectedItem.ToString()), imagePath, txt_Description.Text, DateTime.Now, double.Parse(int_Price.Text));
             Clipboard.SetText(str);
             int num = (int)MessageBox.Show("Query succesfully processed. " + DatabaseHelper.ExecuteQuery(str).RecordsAffected + " records inserted.");

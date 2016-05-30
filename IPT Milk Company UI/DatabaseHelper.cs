@@ -10,7 +10,7 @@ using System.Windows.Forms;
 
 namespace IPT_Milk_Company_UI
 {
-    static class DatabaseHelper
+    public static class DatabaseHelper
     {
         static Dictionary<string, DataTable> dtables = new Dictionary<string, DataTable>();
 
@@ -40,7 +40,7 @@ namespace IPT_Milk_Company_UI
         }
         public static int GetRowID(string table, string searchColumn, string idColumn, string value)
         {
-            DataTable personTbl = GetTable(table, null, null, true);
+            DataTable personTbl = GetTable(table, null, null, false);
             foreach (DataRow row in personTbl.Rows)
             {
                 if (row[searchColumn].ToString() == value)
@@ -49,7 +49,7 @@ namespace IPT_Milk_Company_UI
             return -1;
         }
         static string constr = @"Provider=Microsoft.ACE.OLEDB.12.0;Data Source=|DataDirectory|\Milk Database.accdb;
-Persist Security Info=False;";  
+Persist Security Info=False;";
         public static OleDbDataReader ExecuteQuery(string query)
         {
             RefreshTables();
@@ -59,6 +59,45 @@ Persist Security Info=False;";
             OleDbDataReader reader = command.ExecuteReader();
             connection.Close();
             return reader;
+        }
+
+
+        public static bool IsValidLocation(DatabaseHelper.LocationStruct str)
+        {
+            if (str.postCode > 0 && !string.IsNullOrEmpty(str.city) && !string.IsNullOrEmpty(str.address))
+                return true;
+            else return false;
+        }
+        public struct LocationStruct
+        {
+            public string ToLocationString()
+            {
+                return address + ", " + city;
+            }
+            public LocationStruct(int postCode, string address, string city)
+            {
+                this.postCode = postCode;
+                this.address = address;
+                this.city = city;
+            }
+            public int postCode;
+            public string address;
+            public string city;
+        }
+        public static int AddLocation(LocationStruct location)
+        {
+            if (!IsValidLocation(location))
+                return -1;
+            string query = string.Format("INSERT INTO Location(Postcode,City, Address) VALUES ({0},'{1}','{2}')", location.postCode, location.city, location.address);
+            OleDbDataReader reader = DatabaseHelper.ExecuteQuery(query);
+            DataTable tbl = DatabaseHelper.GetTable("Location", null, null, true);
+            int locationID = -1;
+            foreach (DataRow row in tbl.Rows)
+            {
+                if (row["Address"].ToString() == location.address)
+                    locationID = int.Parse(row["Location ID"].ToString());
+            }
+            return locationID;
         }
 
         public static int GetTableIndex(DataTable tbl, string columnName, int value)
@@ -76,18 +115,19 @@ Persist Security Info=False;";
         public static OleDbDataReader DeleteRow(string tablename, string primaryName, string primaryValue)
         {
             return ExecuteQuery("DELETE FROM [" + tablename + "] WHERE [" + primaryName + "]=" + primaryValue);
-            
+
         }
         public static DataRow GetPerson(int personID)
         {
             int rowid = GetRowID("Person", "Person ID", "Person ID", personID.ToString());
-            return GetTable("Person").Rows[GetTableIndex(GetTable("Person"), "Person ID", rowid)];
+            var dtable = GetTable("Person");
+            return dtable.Rows[GetTableIndex(dtable,"Person ID", rowid)];
         }
 
         public static List<string> GetColumnItems(string tablename, string columnname)
         {
             List<string> items = new List<string>();
-            DataTable table = GetTable(tablename);
+            DataTable table = GetTable(tablename, null, null, true);
             if (table.Columns.Contains(columnname))
                 foreach (DataRow row in table.Rows)
                 {

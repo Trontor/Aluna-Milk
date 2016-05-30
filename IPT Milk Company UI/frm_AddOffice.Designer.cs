@@ -134,6 +134,7 @@
             this.Controls.Add(this.label5);
             this.Name = "frm_AddOffice";
             this.Resizable = false;
+            this.ShadowType = MetroFramework.Forms.MetroFormShadowType.DropShadow;
             this.Text = "Add Office";
             this.Load += new System.EventHandler(this.frm_AddOffice_Load);
             this.ResumeLayout(false);

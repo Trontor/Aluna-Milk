@@ -18,54 +18,56 @@ namespace IPT_Milk_Company_UI
 {
     public partial class frm_AddOffice : MetroForm
     {
-        public int locID = -1;
         public int officeID = -1;
-        public frm_AddOffice(int locationID = -1)
+        public frm_AddOffice(DatabaseHelper.LocationStruct str)
         {
             InitializeComponent();
-            locID = locationID;
-            if (locationID > 0)
-            foreach (DataRow row in DatabaseHelper.GetTable("Location").Rows)
-            {
-                if (row["Location ID"].ToString() == locationID.ToString())
-                {
-                        txt_Location.Text = row["Address"].ToString() + ", " + row["City"].ToString() + ", " +
-                                          row["Postcode"];
-                        btn_AddLocation.Enabled = false;
-                    }
-            }
+            this.locationID = str;
+            if (DatabaseHelper.IsValidLocation(locationID))
+                txt_Location.Text = locationID.ToLocationString();
+                    //foreach (DataRow row in DatabaseHelper.GetTable("Location").Rows)
+                //{
+                //    if (row["Location ID"].ToString() == locationID.ToString())
+                //    {
+                //        txt_Location.Text = row["Address"].ToString() + ", " + row["City"].ToString() + ", " +
+                //                          row["Postcode"];
+                //        btn_AddLocation.Enabled = false;
+                //    }
+                //}
         }
 
         private void AddOffice()
         {
-            string query = string.Format("INSERT INTO Office(Landline, [Office Name], [Location ID]) VALUES ({0},'{1}',{2})", int.Parse(txt_Landline.Text), txt_Name.Text, locID);
-            
+            int newLocationID = DatabaseHelper.AddLocation(locationID);
+            string query = string.Format("INSERT INTO Office(Landline, [Office Name], [Location ID]) VALUES ({0},'{1}',{2})", int.Parse(txt_Landline.Text), txt_Name.Text, newLocationID);
+            officeID = DatabaseHelper.GetRowID("Office", "Office Name", "Office ID", txt_Name.Text);
             OleDbDataReader reader = DatabaseHelper.ExecuteQuery(query);
-            DataTable tbl = DatabaseHelper.GetTable("Location");
-            foreach (DataRow row in tbl.Rows)
-            {
-                if (row["Address"].ToString() == txt_Name.Text)
-                    locID = int.Parse(row["Location ID"].ToString());
-            } 
+            //DataTable tbl = DatabaseHelper.GetTable("Location");
+            //foreach (DataRow row in tbl.Rows)
+            //{
+            //    if (row["Address"].ToString() == txt_Name.Text)
+            //        newLocationID = int.Parse(row["Location ID"].ToString());
+            //}
             Close();
 
         }
 
         private void btn_addProduct_Click(object sender, EventArgs e)
         {
-            ValidityChecker checker = new ValidityChecker(txt_Landline, txt_Name,txt_Location);
+            ValidityChecker checker = new ValidityChecker(txt_Landline, txt_Name, txt_Location);
             List<string> invalidFieldNames = checker.InvalidFields();
             if (invalidFieldNames.Count == 0)
             {
                 AddOffice();
             }
-        } 
-        private int locationID = -1;
+        }
+        private DatabaseHelper.LocationStruct locationID = new DatabaseHelper.LocationStruct();
         private void btn_AddLocation_Click(object sender, EventArgs e)
         {
             frm_AddLocation frm = new frm_AddLocation();
             frm.ShowDialog();
-            locationID = frm.locID; 
+            locationID = frm.locID;
+            txt_Location.Text = locationID.ToLocationString();
         }
 
         private void frm_AddOffice_Load(object sender, EventArgs e)
@@ -74,7 +76,7 @@ namespace IPT_Milk_Company_UI
         }
 
         private void txt_Landline_KeyPress(object sender, KeyPressEventArgs e)
-        { 
+        {
 
             if (!char.IsControl(e.KeyChar) && !char.IsDigit(e.KeyChar) &&
                 (e.KeyChar != '.'))

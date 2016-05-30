@@ -26,44 +26,42 @@ namespace IPT_Milk_Company_UI
         private string imagePath = "";
         private void AddFactory()
         {
+
+            int newLocationID = DatabaseHelper.AddLocation(locationID);
             var myDataSet = DatabaseHelper.LoadProductList();
-            officeID = DatabaseHelper.GetRowID("Office", "Office Name","Office ID", cmb_Office.SelectedItem.ToString());
+            officeID = DatabaseHelper.GetRowID("Office", "Office Name", "Office ID", cmb_Office.SelectedItem.ToString());
             string query =
                 string.Format(
-                    "INSERT INTO Factory([Office ID],[Factory Name], [Registration], [Location ID]) VALUES ({0},'{1}','{2}', {3})",
-                    officeID, txt_Factory_Name.Text, txt_Registration.Text, locationID); 
+                    "INSERT INTO Factory([Office ID],[Factory Name], [Registration]) VALUES ({0},'{1}','{2}')",
+                    officeID, txt_Factory_Name.Text, txt_Registration.Text);
             Clipboard.SetText(query);
             OleDbDataReader reader = DatabaseHelper.ExecuteQuery(query);
-            MessageBox.Show("Query succesfully processed. " + reader.RecordsAffected + " records inserted.");
+            MessageBox.Show("Factory added succesfully.");
         }
 
-        private void btn_addProduct_Click(object sender, EventArgs e)
+        private void btn_addFactory_Click(object sender, EventArgs e)
         {
             ValidityChecker checker = new ValidityChecker(cmb_Office, txt_Registration, txt_Factory_Name);
             if (checker.InvalidFields().Count == 0)
             {
                 AddFactory();
             }
+            Close();
 
         }
 
         private void UpdateFields()
         {
-            List<string> off = DatabaseHelper.GetColumnItems("Office", "Office Name");;
+            List<string> off = DatabaseHelper.GetColumnItems("Office", "Office Name"); ;
             cmb_Office.DataSource = off;
             foreach (DataRow row in DatabaseHelper.GetTable("Office").Rows)
             {
                 if (row["Office ID"].ToString() == officeID.ToString())
                     cmb_Office.SelectedText = row["Office Name"].ToString();
             }
-            foreach (DataRow row in DatabaseHelper.GetTable("Location").Rows)
-            {
-                if (row["Location ID"].ToString() == locationID.ToString())
-                    txt_Location.Text = row["Address"].ToString() + ", " + row["City"].ToString() + ", " + row["Postcode"];
-            }
         }
 
-        private int locationID = -1;
+        private DatabaseHelper.LocationStruct locationID = new DatabaseHelper.LocationStruct();
         private void btn_AddLocation_Click(object sender, EventArgs e)
         {
             frm_AddLocation frm = new frm_AddLocation();
@@ -90,7 +88,7 @@ namespace IPT_Milk_Company_UI
         private int officeID = -1;
         private void btn_Add_Office_Click(object sender, EventArgs e)
         {
-            if (locationID < 0)
+            if (DatabaseHelper.IsValidLocation(locationID))
             {
                 MessageBox.Show("You first must set a location before attaching a new office to this factory.");
                 return;

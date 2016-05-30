@@ -39,6 +39,7 @@
             this.label2 = new System.Windows.Forms.Label();
             this.pictureBox1 = new System.Windows.Forms.PictureBox();
             this.panel1 = new System.Windows.Forms.Panel();
+            this.btn_description = new System.Windows.Forms.Button();
             this.comboBox2 = new System.Windows.Forms.ComboBox();
             this.milk_DatabaseDataSet = new IPT_Milk_Company_UI.Milk_DatabaseDataSet();
             this.label1 = new System.Windows.Forms.Label();
@@ -151,7 +152,7 @@
             0,
             0});
             this.numericUpDown1.Name = "numericUpDown1";
-            this.numericUpDown1.Size = new System.Drawing.Size(42, 20);
+            this.numericUpDown1.Size = new System.Drawing.Size(47, 20);
             this.numericUpDown1.TabIndex = 4;
             this.numericUpDown1.Value = new decimal(new int[] {
             1,
@@ -181,6 +182,7 @@
             // 
             // panel1
             // 
+            this.panel1.Controls.Add(this.btn_description);
             this.panel1.Controls.Add(this.comboBox2);
             this.panel1.Controls.Add(this.label1);
             this.panel1.Dock = System.Windows.Forms.DockStyle.Fill;
@@ -189,13 +191,25 @@
             this.panel1.Size = new System.Drawing.Size(244, 50);
             this.panel1.TabIndex = 3;
             // 
+            // btn_description
+            // 
+            this.btn_description.FlatAppearance.BorderColor = System.Drawing.Color.FromArgb(((int)(((byte)(0)))), ((int)(((byte)(192)))), ((int)(((byte)(192)))));
+            this.btn_description.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.btn_description.Location = new System.Drawing.Point(217, 21);
+            this.btn_description.Name = "btn_description";
+            this.btn_description.Size = new System.Drawing.Size(24, 21);
+            this.btn_description.TabIndex = 25;
+            this.btn_description.Text = "?";
+            this.btn_description.UseVisualStyleBackColor = true;
+            this.btn_description.Click += new System.EventHandler(this.btn_description_Click);
+            // 
             // comboBox2
             // 
             this.comboBox2.DataBindings.Add(new System.Windows.Forms.Binding("SelectedValue", this.milk_DatabaseDataSet, "Products.Product Name", true));
             this.comboBox2.FormattingEnabled = true;
             this.comboBox2.Location = new System.Drawing.Point(29, 21);
             this.comboBox2.Name = "comboBox2";
-            this.comboBox2.Size = new System.Drawing.Size(190, 21);
+            this.comboBox2.Size = new System.Drawing.Size(182, 21);
             this.comboBox2.TabIndex = 4;
             this.comboBox2.SelectedIndexChanged += new System.EventHandler(this.comboBox2_SelectedIndexChanged);
             // 
@@ -263,5 +277,6 @@
         public System.Windows.Forms.Button btn_removeProduct;
         public System.Windows.Forms.NumericUpDown numericUpDown1;
         public System.Windows.Forms.ComboBox comboBox2;
+        private System.Windows.Forms.Button btn_description;
     }
 }

@@ -13,19 +13,20 @@ using System.Linq;
 using System.Text;
 using System.Windows.Forms;
 using MetroFramework.Forms;
+using static IPT_Milk_Company_UI.DatabaseHelper;
 
 namespace IPT_Milk_Company_UI
 {
     public partial class frm_AddLocation : MetroForm
     {
-        public int locID = -1;
+        internal DatabaseHelper.LocationStruct locID = new DatabaseHelper.LocationStruct();
         public frm_AddLocation()
         {
             InitializeComponent();
             LoadExistingLocations();
         }
 
-        Dictionary<int, int> locCmbRelationship = new Dictionary<int, int>();
+        Dictionary<DatabaseHelper.LocationStruct, int> locCmbRelationship = new Dictionary<DatabaseHelper.LocationStruct, int>();
         private void LoadExistingLocations()
         {
             locCmbRelationship.Clear();
@@ -33,11 +34,11 @@ namespace IPT_Milk_Company_UI
             DataTable locationTable = DatabaseHelper.GetTable("Location", null, null, true);
             foreach (DataRow dtr in locationTable.Rows)
             {
-                string postcode = dtr["Postcode"].ToString();
+                int postcode = int.Parse(dtr["Postcode"].ToString());
                 string address = dtr["Address"].ToString();
                 string city = dtr["City"].ToString();
                 cmb_Location.Items.Add(string.Format("{0},{1},({2})", address, city, postcode));
-                locCmbRelationship.Add(int.Parse(dtr["Location ID"].ToString()), cmb_Location.Items.Count - 1);
+                locCmbRelationship.Add(new DatabaseHelper.LocationStruct(postcode, address, city), cmb_Location.Items.Count - 1);
             }
             if (cmb_Location.Items.Count == 0)
             {
@@ -45,19 +46,24 @@ namespace IPT_Milk_Company_UI
                 btn_prexistingLocation.Enabled = false;
                 btn_prexistingLocation.Text = "No Locations Yet";
             }
+            cmb_Location.SelectedIndex = 0;
 
         }
-
-        private void AddLocation()
+        private void SetLocation()
         {
-            string query = string.Format("INSERT INTO Location(Postcode,City, Address) VALUES ({0},'{1}','{2}')", int.Parse(txt_Postcode.Text), txt_City.Text, txt_Address.Text);
-            OleDbDataReader reader = DatabaseHelper.ExecuteQuery(query);
-            DataTable tbl = DatabaseHelper.GetTable("Location", null, null, true);
-            foreach (DataRow row in tbl.Rows)
-            {
-                if (row["Address"].ToString() == txt_Address.Text)
-                    locID = int.Parse(row["Location ID"].ToString());
-            }
+            LocationStruct loc = new LocationStruct(int.Parse(txt_Postcode.Text), txt_Address.Text, txt_City.Text);
+            if (locCmbRelationship.ContainsKey(loc))
+                MessageBox.Show("This location already exists. Please use the dropdown box to select this pre-existing location");
+            else
+                locID = loc;
+            //string query = string.Format("INSERT INTO Location(Postcode,City, Address) VALUES ({0},'{1}','{2}')", int.Parse(txt_Postcode.Text), txt_City.Text, txt_Address.Text);
+            //OleDbDataReader reader = DatabaseHelper.ExecuteQuery(query);
+            //DataTable tbl = DatabaseHelper.GetTable("Location", null, null, true);
+            //foreach (DataRow row in tbl.Rows)
+            //{
+            //    if (row["Address"].ToString() == txt_Address.Text)
+            //        locID = int.Parse(row["Location ID"].ToString());
+            //}
             Close();
         }
 
@@ -67,7 +73,7 @@ namespace IPT_Milk_Company_UI
             List<string> invalidFieldNames = checker.InvalidFields();
             if (invalidFieldNames.Count == 0)
             {
-                AddLocation();
+                SetLocation();
             }
         }
 

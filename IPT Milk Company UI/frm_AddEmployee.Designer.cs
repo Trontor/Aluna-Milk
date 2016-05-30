@@ -422,6 +422,7 @@
             this.Controls.Add(this.txt_First_Name);
             this.Name = "frm_AddEmployee";
             this.Resizable = false;
+            this.ShadowType = MetroFramework.Forms.MetroFormShadowType.AeroShadow;
             this.Text = "New Employee Registration";
             this.Load += new System.EventHandler(this.frm_AddEmployee_Load);
             ((System.ComponentModel.ISupportInitialize)(this.numericUpDown1)).EndInit();

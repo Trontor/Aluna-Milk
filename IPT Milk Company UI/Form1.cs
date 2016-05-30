@@ -8,6 +8,7 @@ using System.Linq;
 using System.Text;
 using System.Windows.Forms;
 using MetroFramework.Forms;
+using System.Threading;
 
 namespace IPT_Milk_Company_UI
 {
@@ -24,7 +25,7 @@ namespace IPT_Milk_Company_UI
             table_Persons = DatabaseHelper.GetTable("Person");
             person_Id = int.Parse(table_Employees.Rows[emp_ID - 1]["Person ID"].ToString());
             LoggedInEmployee.ID = person_Id;
-            string name = DatabaseHelper.GetPerson(LoggedInEmployee.ID)["First Name"].ToString();//table_Persons.Rows[person_Id - 1]["First Name"].ToString();
+            string name = LoggedInEmployee.EmployeeInformation()["First Name"].ToString();//table_Persons.Rows[person_Id - 1]["First Name"].ToString();
             lbl_Subtext.Text = "Welcome " + name;
         }
 
@@ -76,49 +77,54 @@ namespace IPT_Milk_Company_UI
             string query = "SELECT [Order ID], [Last Updated By], [Order Date], Person.[First Name] & \" \" & Person.[Last Name] AS [Servicer],[Required Date],  TruckPersonID.[First Name] & \" \" & TruckPersonID.[Last Name] AS [Dealer Name], [Company],  [Required Time] as [Required], lmao.Person.[First Name] & \" \" & lmao.Person.[Last Name] AS [Truck Driver], [Sent Date]  FROM (SELECT * FROM (SELECT * FROM (SELECT * FROM (SELECT * FROM (SELECT * FROM  (SELECT * FROM Orders INNER JOIN (SELECT * FROM Dealer INNER JOIN Person ON Dealer.[Person ID] = Person.[Person ID]) DealerInformation ON Orders.[Dealer ID] = DealerInformation.[Dealer ID]) TruckID LEFT JOIN [Truck Drivers] ON TruckID.[Truck ID] = [Truck Drivers].[Truck ID]) TruckEmployeeID LEFT JOIN Employees ON TruckEmployeeID.[Employee ID] = Employees.[Employee ID]) TruckPersonID LEFT JOIN Person ON TruckPersonID.Employees.[Person ID] = Person.[Person ID]) ServicingPerson LEFT JOIN Employees ON ServicingPerson.[Serviced Employee ID] = Employees.[Employee ID]) EmployeePerson LEFT JOIN Person ON EmployeePerson.ServicingPerson.Person.[Person ID] = Person.[Person ID]) lmao LEFT JOIN Person ON lmao.EmployeePerson.Employees.[Person ID] = Person.[Person ID]";
             DataTable dtb = DatabaseHelper.GetTable(null, null, query);
             DataTable clone = dtb.Clone();
-            clone.Columns["Sent Date"].DataType = typeof(string);
-            clone.Columns["Order Date"].DataType = typeof(string);
-            clone.Columns["Required"].DataType = typeof(string);
-            ordersView.DataSource = clone;
-            foreach (DataRow row in dtb.Rows)
-            {
-                clone.ImportRow(row);
-            }
-            for (int i = 0; i < clone.Rows.Count; i++)
-            {
-                string str = "";
-                DataRow row = clone.Rows[i];
-                DateTime time = DateTime.Parse(row["Order Date"].ToString());
-                if (ordersView.Rows[i].Cells["Sent Date"].Value.ToString() == "")
-                {
-                    //    DataGridViewCellStyle style = new DataGridViewCellStyle();
-                    //    style.BackColor = Color.FromArgb(255, 238, 118);
-                    //    style.SelectionBackColor = style.BackColor;
-                    //    ordersView.Rows[i].Cells["Sent Date"].Style = style;
-                    ordersView.Rows[i].Cells["Sent Date"].Value = "Not Sent";
-                }
-                ordersView.Rows[i].Cells["Order Date"].Value = NormalizeDate(time);
-                ordersView.Rows[i].Cells["Order Date"].ToolTipText = time.ToString();
-                switch (row["Required"].ToString())
-                {
-                    case "0":
-                        str = "Anytime";
-                        break;
-                    case "1":
-                        str = "Morning";
-                        break;
-                    case "2":
-                        str = "Afternoon";
-                        break;
-                }
-                ordersView.Rows[i].Cells["Required"].ToolTipText = row["Required"].ToString();
-                clone.Rows[i]["Required"] = str;
-            }
 
-            ordersView.Columns["Last Updated By"].Visible = false;
-            ordersView.Columns["Order ID"].Visible = false;
-            ordersView.AutoSizeColumnsMode = DataGridViewAutoSizeColumnsMode.Fill;
-            ordersView.AutoResizeColumns();
+            Invoke(new Action(() =>
+            {
+                clone.Columns["Sent Date"].DataType = typeof(string);
+                clone.Columns["Order Date"].DataType = typeof(string);
+                clone.Columns["Required"].DataType = typeof(string);
+                ordersView.DataSource = clone;
+                foreach (DataRow row in dtb.Rows)
+                {
+                    clone.ImportRow(row);
+                }
+
+                for (int i = 0; i < clone.Rows.Count; i++)
+                {
+                    string str = "";
+                    DataRow row = clone.Rows[i];
+                    DateTime time = DateTime.Parse(row["Order Date"].ToString());
+                    if (ordersView.Rows[i].Cells["Sent Date"].Value.ToString() == "")
+                    {
+                        //    DataGridViewCellStyle style = new DataGridViewCellStyle();
+                        //    style.BackColor = Color.FromArgb(255, 238, 118);
+                        //    style.SelectionBackColor = style.BackColor;
+                        //    ordersView.Rows[i].Cells["Sent Date"].Style = style;
+                        ordersView.Rows[i].Cells["Sent Date"].Value = "Not Sent";
+                    }
+                    ordersView.Rows[i].Cells["Order Date"].Value = NormalizeDate(time);
+                    ordersView.Rows[i].Cells["Order Date"].ToolTipText = time.ToString();
+                    switch (row["Required"].ToString())
+                    {
+                        case "0":
+                            str = "Anytime";
+                            break;
+                        case "1":
+                            str = "Morning";
+                            break;
+                        case "2":
+                            str = "Afternoon";
+                            break;
+                    }
+                    ordersView.Rows[i].Cells["Required"].ToolTipText = row["Required"].ToString();
+                    clone.Rows[i]["Required"] = str;
+                }
+
+                ordersView.Columns["Last Updated By"].Visible = false;
+                ordersView.Columns["Order ID"].Visible = false;
+                ordersView.AutoSizeColumnsMode = DataGridViewAutoSizeColumnsMode.Fill;
+                ordersView.AutoResizeColumns();
+            }));
         }
 
         private void LoadEmployees()
@@ -136,8 +142,11 @@ namespace IPT_Milk_Company_UI
             //{
 
             //}
+            Invoke(new Action(() =>
+            {
                 employeesView.DataSource = dtb;
-            ordersView.AutoResizeColumns();
+                ordersView.AutoResizeColumns();
+            }));
         }
         private void Form1_Load(object sender, EventArgs e)
         {
@@ -161,7 +170,7 @@ namespace IPT_Milk_Company_UI
                 int currentMouseOverRow = ordersView.HitTest(e.X, e.Y).RowIndex;
                 deleteOrder.Click += (a, f) =>
                   {
-                      if (MessageBox.Show("Are you sure you want to delete the order for " + ordersView.Rows[currentMouseOverRow].Cells["Dealer Name"].Value.ToString())== DialogResult.OK)
+                      if (MessageBox.Show("Are you sure you want to delete the order for " + ordersView.Rows[currentMouseOverRow].Cells["Dealer Name"].Value.ToString()) == DialogResult.OK)
                       {
                           DatabaseHelper.DeleteRow("Orders", "Order ID", ordersView.Rows[currentMouseOverRow].Cells["Order ID"].Value.ToString());
                       }
@@ -169,6 +178,7 @@ namespace IPT_Milk_Company_UI
                 m.MenuItems.Add(viewOrders);
                 m.MenuItems.Add(deleteOrder);
 
+                if (currentMouseOverRow > 0)
                 ordersView.Rows[currentMouseOverRow].Selected = true;
                 m.Show(ordersView, new Point(e.X, e.Y));
 
@@ -178,6 +188,20 @@ namespace IPT_Milk_Company_UI
         private void btn_addEmployee_Click(object sender, EventArgs e)
         {
             new frm_AddEmployee().ShowDialog();
+        }
+
+        private void tmr_Refresh_Tick(object sender, EventArgs e)
+        {
+            new Thread(() =>
+            {
+                LoadEmployees();
+                LoadOrders();
+            }).Start();
+        }
+
+        private void btn_addDealer_Click(object sender, EventArgs e)
+        {
+            new frm_AddDealer().ShowDialog();
         }
     }
 }

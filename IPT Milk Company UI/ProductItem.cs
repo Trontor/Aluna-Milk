@@ -20,19 +20,28 @@ namespace IPT_Milk_Company_UI
             LoadProductList();
         }
         DataTable table = new DataTable();
-        private void LoadProductList()
+        public void LoadProductList(List<string> exceptions = null)
         {
+            string lastSelectedItem = "";
+            if (comboBox2.Items.Count > 0)
+                lastSelectedItem = comboBox2.SelectedItem.ToString();
             table = DatabaseHelper.GetTable("Products");
-            foreach (DataRow item in table.Rows)
+            if (exceptions == null)
+                exceptions = new List<string>();
+            List<string> productNames = DatabaseHelper.GetColumnItems("Products", "Product Name").Except(exceptions).ToList();
+            List<string> productDescriptions = DatabaseHelper.GetColumnItems("Products", "Descripton");
+            foreach(string name in productNames)
             {
-                comboBox2.Items.Add(item["Product Name"]);
+                
             }
-            comboBox2.SelectedIndex = comboBox2.Items.Count - (comboBox2.Items.Count - 1);
+            comboBox2.DataSource = productNames;
+            if (comboBox2.Items.Contains(lastSelectedItem))
+                comboBox2.SelectedItem = lastSelectedItem;
         }
         private void ProductItem_Load(object sender, EventArgs e)
         {
         }
-
+        Dictionary<string, string> descriptions = new Dictionary<string, string>();
         public double totalPrice = 0;
         private void numericUpDown1_ValueChanged(object sender, EventArgs e)
         {
@@ -68,6 +77,11 @@ namespace IPT_Milk_Company_UI
             else
                 pictureBox1.Image = ImageHelper.ResizeImage(Properties.Resources.question, pictureBox1.Width, pictureBox1.Height);
             UpdatePrice();
+        }
+
+        private void btn_description_Click(object sender, EventArgs e)
+        {
+            
         }
     }
 }

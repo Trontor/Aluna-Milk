@@ -21,9 +21,10 @@ namespace IPT_Milk_Company_UI
         {
 
         }
-        int Location = -1;
+        DatabaseHelper.LocationStruct Loc = new DatabaseHelper.LocationStruct();
         private void AddEmployee()
         {
+            int newLocationID = DatabaseHelper.AddLocation(Loc);
             int personID = 0;
 
             string personQuery = "INSERT INTO Person " +
@@ -47,7 +48,7 @@ namespace IPT_Milk_Company_UI
                 DatabaseHelper.CalculateMD5Hash(txt_Password.Text),
                 personID,
                 dtp_Hire_Date.Value.Date,
-                Location,
+                newLocationID,
                 chk_Temporary.Checked ? "Yes" : "No");
             DatabaseHelper.ExecuteQuery(query);
             MessageBox.Show("Employee added successfully.");
@@ -55,8 +56,8 @@ namespace IPT_Milk_Company_UI
         }
 
         private void btn_addEmployee_Click(object sender, EventArgs e)
-        {   
-            ValidityChecker checker = new ValidityChecker(txt_First_Name, txt_Last_Name, txt_Password, txt_Tax_File_Number, txt_User_Name);
+        {
+            ValidityChecker checker = new ValidityChecker(txt_First_Name, txt_Last_Name, txt_Password, txt_Tax_File_Number, txt_User_Name,txt_Location);
             if (checker.InvalidFields().Count == 0)
             {
                 AddEmployee();
@@ -81,13 +82,13 @@ namespace IPT_Milk_Company_UI
         {
             frm_AddLocation frm = new frm_AddLocation();
             frm.ShowDialog();
-            Location = frm.locID;
-
-            foreach (DataRow row in DatabaseHelper.GetTable("Location").Rows)
-            {
-                if (row["Location ID"].ToString() == Location.ToString())
-                    txt_Location.Text = row["Address"].ToString() + ", " + row["City"].ToString();
-            }
+            Loc = frm.locID;
+            txt_Location.Text = Loc.ToLocationString();
+            //foreach (DataRow row in DatabaseHelper.GetTable("Location", null, null, true).Rows)
+            //{
+            //    if (row["Location ID"].ToString() == Location.ToString())
+            //        txt_Location.Text = row["Address"].ToString() + ", " + row["City"].ToString();
+            //}
         }
     }
 }

@@ -162,6 +162,7 @@
             this.Controls.Add(this.txt_Address);
             this.Name = "frm_AddLocation";
             this.Resizable = false;
+            this.ShadowType = MetroFramework.Forms.MetroFormShadowType.DropShadow;
             this.Text = "Add Location";
             this.TextAlign = MetroFramework.Forms.MetroFormTextAlign.Center;
             this.Load += new System.EventHandler(this.frm_AddLocation_Load);

@@ -9,9 +9,13 @@ namespace IPT_Milk_Company_UI
     static class LoggedInEmployee
     {
         public static int ID = -1;
+        private static DataRow r;
         public static DataRow EmployeeInformation()
-        { 
-            return DatabaseHelper.GetPerson(ID);
+        {
+            if (r == null)
+                r = DatabaseHelper.GetPerson(ID);
+
+            return r;
         }
     }
 }

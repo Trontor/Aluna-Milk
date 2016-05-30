@@ -64,6 +64,8 @@ namespace IPT_Milk_Company_UI
             AddProduct();
         }
 
+
+        List<string> itemExceptions = new List<string>();
         private void AddProduct(string productname = "", int defaultQuantity = 1)
         {
 
@@ -138,14 +140,14 @@ namespace IPT_Milk_Company_UI
 
                 cmb_Time.SelectedItem = updateRow.Cells["Required"].Value.ToString();
                 string lastUpdatedBy = updateRow.Cells["Last Updated By"].Value.ToString();
-                if (!string.IsNullOrEmpty(lastUpdatedBy))
+                if (!string.IsNullOrEmpty(lastUpdatedBy) && int.Parse(lastUpdatedBy) > 0)
                 {
                     DataRow lastUpdatedPersonRow = DatabaseHelper.GetPerson(int.Parse(lastUpdatedBy));
                     string Name = lastUpdatedPersonRow["First Name"].ToString() + " " + lastUpdatedPersonRow["Last Name"].ToString();
                     if (!string.IsNullOrEmpty(lastUpdatedBy))
                         lbl_servicedEmployee.Text += " // Last Updated by " + Name;
                 }
-                foreach (DataRow detailRow in DatabaseHelper.GetTable("Order Details").Rows)
+                foreach (DataRow detailRow in DatabaseHelper.GetTable("Order Details", null, null, true).Rows)
                 {
                     if (detailRow["Order ID"].ToString() == orderID.ToString())
                     {
@@ -188,6 +190,22 @@ namespace IPT_Milk_Company_UI
         private DataTable table = new DataTable();
         private void PlaceOrder()
         {
+            List<string> listStr = new List<string>();
+
+            foreach (ProductItem item in flw_Products.Controls)
+            {
+                listStr.Add(item.comboBox2.SelectedItem.ToString());
+            }
+
+            var duplicateKeys = listStr.GroupBy(x => x)
+                                    .Where(group => group.Count() > 1)
+                                    .Select(group => group.Key);
+            if (duplicateKeys.Count() > 0)
+            {
+                MessageBox.Show("There are duplicate products! Please fix this before continuing.");
+                return;
+            }
+
             //Create entry in Orders table
             int empID = LoggedInEmployee.ID;
             DateTime orderDate = DateTime.Now;
@@ -205,9 +223,9 @@ namespace IPT_Milk_Company_UI
                     dealerID, orderDate, empID, dtp_Order_Date.Value.Date, cmb_Time.SelectedIndex);
             var rdr = DatabaseHelper.ExecuteQuery(orderQuery);
 
-            DataTable orderTable = DatabaseHelper.GetTable("Orders");
+            DataTable orderTable = DatabaseHelper.GetTable("Orders", null, null, true);
 
-            DataTable productTable = DatabaseHelper.GetTable("Products");
+            DataTable productTable = DatabaseHelper.GetTable("Products", null, null, true);
             int orderID = -1;
             if (btn_Place_Order.Text.Contains("Update"))
                 orderID = this.orderID;
