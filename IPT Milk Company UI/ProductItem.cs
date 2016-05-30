@@ -20,6 +20,8 @@ namespace IPT_Milk_Company_UI
             LoadProductList();
         }
         DataTable table = new DataTable();
+        private List<string> productDescriptions;
+        private List<string> productNames;
         public void LoadProductList(List<string> exceptions = null)
         {
             string lastSelectedItem = "";
@@ -28,12 +30,9 @@ namespace IPT_Milk_Company_UI
             table = DatabaseHelper.GetTable("Products");
             if (exceptions == null)
                 exceptions = new List<string>();
-            List<string> productNames = DatabaseHelper.GetColumnItems("Products", "Product Name").Except(exceptions).ToList();
-            List<string> productDescriptions = DatabaseHelper.GetColumnItems("Products", "Descripton");
-            foreach(string name in productNames)
-            {
-                
-            }
+            productNames = DatabaseHelper.GetColumnItems("Products", "Product Name").Except(exceptions).ToList();
+            productDescriptions = DatabaseHelper.GetColumnItems("Products", "Description");
+
             comboBox2.DataSource = productNames;
             if (comboBox2.Items.Contains(lastSelectedItem))
                 comboBox2.SelectedItem = lastSelectedItem;
@@ -81,7 +80,13 @@ namespace IPT_Milk_Company_UI
 
         private void btn_description_Click(object sender, EventArgs e)
         {
-            
+            int index = 0;
+            List<string> str = productNames.Where(x => x == comboBox2.SelectedItem.ToString()).ToList();
+            if (str.Count > 0)
+            {
+                index = productNames.IndexOf(comboBox2.SelectedItem.ToString());
+                MessageBox.Show(productDescriptions[index], "Product Description for " + str[0], MessageBoxButtons.OK, MessageBoxIcon.Information);
+            }
         }
     }
 }

@@ -34,11 +34,11 @@
             this.label1 = new System.Windows.Forms.Label();
             this.txt_City = new System.Windows.Forms.TextBox();
             this.label2 = new System.Windows.Forms.Label();
-            this.txt_Postcode = new System.Windows.Forms.TextBox();
             this.label3 = new System.Windows.Forms.Label();
             this.label4 = new System.Windows.Forms.Label();
             this.cmb_Location = new System.Windows.Forms.ComboBox();
             this.btn_prexistingLocation = new System.Windows.Forms.Button();
+            this.txt_Postcode = new System.Windows.Forms.MaskedTextBox();
             this.SuspendLayout();
             // 
             // label5
@@ -96,16 +96,6 @@
             this.label2.TabIndex = 20;
             this.label2.Text = "Postcode";
             // 
-            // txt_Postcode
-            // 
-            this.txt_Postcode.Location = new System.Drawing.Point(63, 220);
-            this.txt_Postcode.Name = "txt_Postcode";
-            this.txt_Postcode.Size = new System.Drawing.Size(142, 20);
-            this.txt_Postcode.TabIndex = 19;
-            this.txt_Postcode.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
-            this.txt_Postcode.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.txt_Postcode_KeyPress);
-            this.txt_Postcode.KeyUp += new System.Windows.Forms.KeyEventHandler(this.txt_Postcode_KeyUp);
-            // 
             // label3
             // 
             this.label3.AutoSize = true;
@@ -144,17 +134,26 @@
             this.btn_prexistingLocation.UseVisualStyleBackColor = true;
             this.btn_prexistingLocation.Click += new System.EventHandler(this.btn_prexistingLocation_Click);
             // 
+            // txt_Postcode
+            // 
+            this.txt_Postcode.Location = new System.Drawing.Point(63, 220);
+            this.txt_Postcode.Mask = "0000";
+            this.txt_Postcode.Name = "txt_Postcode";
+            this.txt_Postcode.Size = new System.Drawing.Size(142, 20);
+            this.txt_Postcode.TabIndex = 59;
+            this.txt_Postcode.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
+            // 
             // frm_AddLocation
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(215, 283);
+            this.Controls.Add(this.txt_Postcode);
             this.Controls.Add(this.btn_prexistingLocation);
             this.Controls.Add(this.cmb_Location);
             this.Controls.Add(this.label4);
             this.Controls.Add(this.label3);
             this.Controls.Add(this.label2);
-            this.Controls.Add(this.txt_Postcode);
             this.Controls.Add(this.label1);
             this.Controls.Add(this.txt_City);
             this.Controls.Add(this.btn_addProduct);
@@ -178,10 +177,10 @@
         private System.Windows.Forms.Label label1;
         private System.Windows.Forms.TextBox txt_City;
         private System.Windows.Forms.Label label2;
-        private System.Windows.Forms.TextBox txt_Postcode;
         private System.Windows.Forms.Label label3;
         private System.Windows.Forms.Label label4;
         private System.Windows.Forms.ComboBox cmb_Location;
         private System.Windows.Forms.Button btn_prexistingLocation;
+        private System.Windows.Forms.MaskedTextBox txt_Postcode;
     }
 }

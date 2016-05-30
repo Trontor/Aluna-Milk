@@ -117,7 +117,10 @@ D:\Aluna-Milk\IPT Milk Company UI\obj\x86\Debug\IPT_Milk_Company_UI.Properties.R
 D:\Aluna-Milk\IPT Milk Company UI\obj\x86\Debug\GenerateResource.read.1.tlog
 D:\Aluna-Milk\IPT Milk Company UI\obj\x86\Debug\GenerateResource.write.1.tlog
 D:\Aluna-Milk\IPT Milk Company UI\obj\x86\Debug\IPT Milk Company UI.exe
-C:\Users\Rohyl Joshi\Source\Repos\Aluna-Milk\IPT Milk Company UI\obj\x86\Debug\IPT Milk Company UI.csprojResolveAssemblyReference.cache
 C:\Users\rjoshi1\Source\Repos\Aluna-Milk\IPT Milk Company UI\obj\x86\Debug\IPT_Milk_Company_UI.frm_AddEmployee.resources
 C:\Users\rjoshi1\Source\Repos\Aluna-Milk\IPT Milk Company UI\obj\x86\Debug\IPT_Milk_Company_UI.frm_AddDealer.resources
 C:\Users\rjoshi1\Source\Repos\Aluna-Milk\IPT Milk Company UI\obj\x86\Debug\IPT Milk Company UI.csprojResolveAssemblyReference.cache
+C:\Users\Rohyl Joshi\Source\Repos\Aluna-Milk\IPT Milk Company UI\obj\x86\Debug\IPT_Milk_Company_UI.frm_AddDealer.resources
+C:\Users\Rohyl Joshi\Source\Repos\Aluna-Milk\IPT Milk Company UI\obj\x86\Debug\IPT_Milk_Company_UI.frm_AddEmployee.resources
+C:\Users\Rohyl Joshi\Source\Repos\Aluna-Milk\IPT Milk Company UI\obj\x86\Debug\IPT_Milk_Company_UI.frm_AddTruck.resources
+C:\Users\Rohyl Joshi\Source\Repos\Aluna-Milk\IPT Milk Company UI\obj\x86\Debug\IPT Milk Company UI.csprojResolveAssemblyReference.cache

@@ -40,7 +40,7 @@ namespace IPT_Milk_Company_UI
         }
         public static int GetRowID(string table, string searchColumn, string idColumn, string value)
         {
-            DataTable personTbl = GetTable(table, null, null, false);
+            DataTable personTbl = GetTable(table, null, null, true);
             foreach (DataRow row in personTbl.Rows)
             {
                 if (row[searchColumn].ToString() == value)
@@ -121,7 +121,7 @@ Persist Security Info=False;";
         {
             int rowid = GetRowID("Person", "Person ID", "Person ID", personID.ToString());
             var dtable = GetTable("Person");
-            return dtable.Rows[GetTableIndex(dtable,"Person ID", rowid)];
+            return dtable.Rows[GetTableIndex(dtable, "Person ID", rowid)];
         }
 
         public static List<string> GetColumnItems(string tablename, string columnname)

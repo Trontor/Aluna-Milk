@@ -25,7 +25,7 @@ namespace IPT_Milk_Company_UI
             table_Persons = DatabaseHelper.GetTable("Person");
             person_Id = int.Parse(table_Employees.Rows[emp_ID - 1]["Person ID"].ToString());
             LoggedInEmployee.ID = person_Id;
-            string name = LoggedInEmployee.EmployeeInformation()["First Name"].ToString();//table_Persons.Rows[person_Id - 1]["First Name"].ToString();
+            string name = LoggedInEmployee.EmployeeInformation()["First Name"].ToString() + " " + LoggedInEmployee.EmployeeInformation()["Last Name"].ToString();///table_Persons.Rows[person_Id - 1]["First Name"].ToString();
             lbl_Subtext.Text = "Welcome " + name;
         }
 
@@ -74,14 +74,14 @@ namespace IPT_Milk_Company_UI
 
         private void LoadOrders()
         {
-            string query = "SELECT [Order ID], [Last Updated By], [Order Date], Person.[First Name] & \" \" & Person.[Last Name] AS [Servicer],[Required Date],  TruckPersonID.[First Name] & \" \" & TruckPersonID.[Last Name] AS [Dealer Name], [Company],  [Required Time] as [Required], lmao.Person.[First Name] & \" \" & lmao.Person.[Last Name] AS [Truck Driver], [Sent Date]  FROM (SELECT * FROM (SELECT * FROM (SELECT * FROM (SELECT * FROM (SELECT * FROM  (SELECT * FROM Orders INNER JOIN (SELECT * FROM Dealer INNER JOIN Person ON Dealer.[Person ID] = Person.[Person ID]) DealerInformation ON Orders.[Dealer ID] = DealerInformation.[Dealer ID]) TruckID LEFT JOIN [Truck Drivers] ON TruckID.[Truck ID] = [Truck Drivers].[Truck ID]) TruckEmployeeID LEFT JOIN Employees ON TruckEmployeeID.[Employee ID] = Employees.[Employee ID]) TruckPersonID LEFT JOIN Person ON TruckPersonID.Employees.[Person ID] = Person.[Person ID]) ServicingPerson LEFT JOIN Employees ON ServicingPerson.[Serviced Employee ID] = Employees.[Employee ID]) EmployeePerson LEFT JOIN Person ON EmployeePerson.ServicingPerson.Person.[Person ID] = Person.[Person ID]) lmao LEFT JOIN Person ON lmao.EmployeePerson.Employees.[Person ID] = Person.[Person ID]";
+            string query = "SELECT [Order ID], [Last Updated By], [Order Date] AS Ordered, Person.[First Name] & \" \" & Person.[Last Name] AS [Servicer],[Required Date],  TruckPersonID.[First Name] & \" \" & TruckPersonID.[Last Name] AS [Dealer Name], [Company],  [Required Time] as [Required], lmao.Person.[First Name] & \" \" & lmao.Person.[Last Name] AS [Truck Driver], [Sent Date]  FROM (SELECT * FROM (SELECT * FROM (SELECT * FROM (SELECT * FROM (SELECT * FROM  (SELECT * FROM Orders INNER JOIN (SELECT * FROM Dealer INNER JOIN Person ON Dealer.[Person ID] = Person.[Person ID]) DealerInformation ON Orders.[Dealer ID] = DealerInformation.[Dealer ID]) TruckID LEFT JOIN [Truck Drivers] ON TruckID.[Truck ID] = [Truck Drivers].[Truck ID]) TruckEmployeeID LEFT JOIN Employees ON TruckEmployeeID.[Employee ID] = Employees.[Employee ID]) TruckPersonID LEFT JOIN Person ON TruckPersonID.Employees.[Person ID] = Person.[Person ID]) ServicingPerson LEFT JOIN Employees ON ServicingPerson.[Serviced Employee ID] = Employees.[Employee ID]) EmployeePerson LEFT JOIN Person ON EmployeePerson.ServicingPerson.Person.[Person ID] = Person.[Person ID]) lmao LEFT JOIN Person ON lmao.EmployeePerson.Employees.[Person ID] = Person.[Person ID]";
             DataTable dtb = DatabaseHelper.GetTable(null, null, query);
             DataTable clone = dtb.Clone();
 
             Invoke(new Action(() =>
             {
                 clone.Columns["Sent Date"].DataType = typeof(string);
-                clone.Columns["Order Date"].DataType = typeof(string);
+                clone.Columns["Ordered"].DataType = typeof(string);
                 clone.Columns["Required"].DataType = typeof(string);
                 ordersView.DataSource = clone;
                 foreach (DataRow row in dtb.Rows)
@@ -93,7 +93,7 @@ namespace IPT_Milk_Company_UI
                 {
                     string str = "";
                     DataRow row = clone.Rows[i];
-                    DateTime time = DateTime.Parse(row["Order Date"].ToString());
+                    DateTime time = DateTime.Parse(row["Ordered"].ToString());
                     if (ordersView.Rows[i].Cells["Sent Date"].Value.ToString() == "")
                     {
                         //    DataGridViewCellStyle style = new DataGridViewCellStyle();
@@ -102,8 +102,8 @@ namespace IPT_Milk_Company_UI
                         //    ordersView.Rows[i].Cells["Sent Date"].Style = style;
                         ordersView.Rows[i].Cells["Sent Date"].Value = "Not Sent";
                     }
-                    ordersView.Rows[i].Cells["Order Date"].Value = NormalizeDate(time);
-                    ordersView.Rows[i].Cells["Order Date"].ToolTipText = time.ToString();
+                    ordersView.Rows[i].Cells["Ordered"].Value = NormalizeDate(time);
+                    ordersView.Rows[i].Cells["Ordered"].ToolTipText = time.ToString();
                     switch (row["Required"].ToString())
                     {
                         case "0":
@@ -179,7 +179,7 @@ namespace IPT_Milk_Company_UI
                 m.MenuItems.Add(deleteOrder);
 
                 if (currentMouseOverRow > 0)
-                ordersView.Rows[currentMouseOverRow].Selected = true;
+                    ordersView.Rows[currentMouseOverRow].Selected = true;
                 m.Show(ordersView, new Point(e.X, e.Y));
 
             }
@@ -202,6 +202,16 @@ namespace IPT_Milk_Company_UI
         private void btn_addDealer_Click(object sender, EventArgs e)
         {
             new frm_AddDealer().ShowDialog();
+        }
+
+        private void btn_addTruck_Click(object sender, EventArgs e)
+        {
+            new frm_AddTruck().ShowDialog();
+        }
+
+        private void metroTabPage1_Click(object sender, EventArgs e)
+        {
+
         }
     }
 }

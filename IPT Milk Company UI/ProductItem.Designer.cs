@@ -195,7 +195,7 @@
             // 
             this.btn_description.FlatAppearance.BorderColor = System.Drawing.Color.FromArgb(((int)(((byte)(0)))), ((int)(((byte)(192)))), ((int)(((byte)(192)))));
             this.btn_description.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.btn_description.Location = new System.Drawing.Point(217, 21);
+            this.btn_description.Location = new System.Drawing.Point(190, 22);
             this.btn_description.Name = "btn_description";
             this.btn_description.Size = new System.Drawing.Size(24, 21);
             this.btn_description.TabIndex = 25;
@@ -207,9 +207,9 @@
             // 
             this.comboBox2.DataBindings.Add(new System.Windows.Forms.Binding("SelectedValue", this.milk_DatabaseDataSet, "Products.Product Name", true));
             this.comboBox2.FormattingEnabled = true;
-            this.comboBox2.Location = new System.Drawing.Point(29, 21);
+            this.comboBox2.Location = new System.Drawing.Point(34, 22);
             this.comboBox2.Name = "comboBox2";
-            this.comboBox2.Size = new System.Drawing.Size(182, 21);
+            this.comboBox2.Size = new System.Drawing.Size(150, 21);
             this.comboBox2.TabIndex = 4;
             this.comboBox2.SelectedIndexChanged += new System.EventHandler(this.comboBox2_SelectedIndexChanged);
             // 

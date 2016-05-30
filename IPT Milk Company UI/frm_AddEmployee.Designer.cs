@@ -45,7 +45,6 @@
             this.txt_User_Name = new System.Windows.Forms.TextBox();
             this.label7 = new System.Windows.Forms.Label();
             this.label4 = new System.Windows.Forms.Label();
-            this.txt_Tax_File_Number = new System.Windows.Forms.TextBox();
             this.label11 = new System.Windows.Forms.Label();
             this.txt_Email = new System.Windows.Forms.TextBox();
             this.label12 = new System.Windows.Forms.Label();
@@ -60,6 +59,7 @@
             this.txt_Location = new System.Windows.Forms.TextBox();
             this.label15 = new System.Windows.Forms.Label();
             this.btn_addLocation = new System.Windows.Forms.Button();
+            this.txt_Tax_File_Number = new System.Windows.Forms.MaskedTextBox();
             ((System.ComponentModel.ISupportInitialize)(this.numericUpDown1)).BeginInit();
             this.SuspendLayout();
             // 
@@ -120,7 +120,7 @@
             this.label6.ForeColor = System.Drawing.Color.Teal;
             this.label6.Location = new System.Drawing.Point(23, 56);
             this.label6.Name = "label6";
-            this.label6.Size = new System.Drawing.Size(163, 21);
+            this.label6.Size = new System.Drawing.Size(162, 21);
             this.label6.TabIndex = 26;
             this.label6.Text = "Personal Information";
             // 
@@ -215,13 +215,6 @@
             this.label4.Size = new System.Drawing.Size(84, 13);
             this.label4.TabIndex = 37;
             this.label4.Text = "Tax File Number";
-            // 
-            // txt_Tax_File_Number
-            // 
-            this.txt_Tax_File_Number.Location = new System.Drawing.Point(105, 311);
-            this.txt_Tax_File_Number.Name = "txt_Tax_File_Number";
-            this.txt_Tax_File_Number.Size = new System.Drawing.Size(276, 20);
-            this.txt_Tax_File_Number.TabIndex = 9;
             // 
             // label11
             // 
@@ -383,11 +376,21 @@
             this.btn_addLocation.UseVisualStyleBackColor = true;
             this.btn_addLocation.Click += new System.EventHandler(this.btn_addLocation_Click);
             // 
+            // txt_Tax_File_Number
+            // 
+            this.txt_Tax_File_Number.Location = new System.Drawing.Point(105, 311);
+            this.txt_Tax_File_Number.Mask = "00000000";
+            this.txt_Tax_File_Number.Name = "txt_Tax_File_Number";
+            this.txt_Tax_File_Number.Size = new System.Drawing.Size(277, 20);
+            this.txt_Tax_File_Number.TabIndex = 58;
+            this.txt_Tax_File_Number.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
+            // 
             // frm_AddEmployee
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(404, 464);
+            this.Controls.Add(this.txt_Tax_File_Number);
             this.Controls.Add(this.btn_addLocation);
             this.Controls.Add(this.txt_Location);
             this.Controls.Add(this.label15);
@@ -410,7 +413,6 @@
             this.Controls.Add(this.txt_User_Name);
             this.Controls.Add(this.label7);
             this.Controls.Add(this.label4);
-            this.Controls.Add(this.txt_Tax_File_Number);
             this.Controls.Add(this.label10);
             this.Controls.Add(this.cmb_Positions);
             this.Controls.Add(this.label6);
@@ -450,7 +452,6 @@
         private System.Windows.Forms.TextBox txt_User_Name;
         private System.Windows.Forms.Label label7;
         private System.Windows.Forms.Label label4;
-        private System.Windows.Forms.TextBox txt_Tax_File_Number;
         private System.Windows.Forms.Label label11;
         private System.Windows.Forms.TextBox txt_Email;
         private System.Windows.Forms.Label label12;
@@ -465,5 +466,6 @@
         private System.Windows.Forms.TextBox txt_Location;
         private System.Windows.Forms.Label label15;
         private System.Windows.Forms.Button btn_addLocation;
+        private System.Windows.Forms.MaskedTextBox txt_Tax_File_Number;
     }
 }
