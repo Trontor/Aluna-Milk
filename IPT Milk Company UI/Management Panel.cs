@@ -236,7 +236,11 @@ namespace IPT_Milk_Company_UI
         }
 
         private void metroTabPage1_Click(object sender, EventArgs e)
+        { }
+
+        private void btn_noFunction(object sender, EventArgs e)
         {
+            MessageBox.Show("Sorry, this function does not exist yet!");
 
         }
     }
