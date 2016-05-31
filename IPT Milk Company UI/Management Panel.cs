@@ -145,13 +145,40 @@ namespace IPT_Milk_Company_UI
             Invoke(new Action(() =>
             {
                 employeesView.DataSource = dtb;
-                ordersView.AutoResizeColumns();
+                employeesView.AutoResizeColumns();
             }));
         }
-        private void Form1_Load(object sender, EventArgs e)
+        private void LoadOffices()
+        {
+            string query = "SELECT [Office Name], [Landline] as Phone, [Address] & \", \"  & [City] AS Location FROM Office LEFT JOIN Location ON Office.[Location ID] = Location.[Location ID]";
+            DataTable dtb = DatabaseHelper.GetTable(null, null, query);
+            Invoke(new Action(() =>
+            {
+                officesView.DataSource = dtb;
+                officesView.AutoResizeColumns();
+            }));
+        }
+        private void LoadDealers()
+        { 
+            string query = "SELECT [First Name] & \", \"  & [Last Name] AS Name, [Company], [Address] & \", \" & [City] AS Location FROM (SELECT * FROM Dealer LEFT JOIN Person ON Dealer.[Person ID] = Person.[Person ID]) xD LEFT JOIN Location ON Location.[Location ID] = xD.[Location ID]";
+            DataTable dtb = DatabaseHelper.GetTable(null, null, query);
+            Invoke(new Action(() =>
+            {
+                dealerView.DataSource = dtb;
+                dealerView.AutoResizeColumns();
+            }));
+        }
+        private void LoadGridViews()
         {
             LoadOrders();
             LoadEmployees();
+            LoadOffices();
+            LoadDealers();
+        }
+        
+        private void Form1_Load(object sender, EventArgs e)
+        {
+            LoadGridViews();
 
             //    DatabaseHelper orderQuery = DatabaseHelper.ExecuteQuery(
         }
@@ -194,8 +221,7 @@ namespace IPT_Milk_Company_UI
         {
             new Thread(() =>
             {
-                LoadEmployees();
-                LoadOrders();
+                LoadGridViews();
             }).Start();
         }
 

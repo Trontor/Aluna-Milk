@@ -37,7 +37,7 @@ namespace IPT_Milk_Company_UI
         private int Employee_ID = -1;
         private void ValidateLogin()
         {
-                        Debug.WriteLine(DatabaseHelper.CalculateMD5Hash(txt_Password.Text));
+            Debug.WriteLine(DatabaseHelper.CalculateMD5Hash(txt_Password.Text));
 
             bool loggedIn = false;
             ValidityChecker checker = new ValidityChecker(txt_Password, txt_Username);
@@ -53,7 +53,7 @@ namespace IPT_Milk_Company_UI
                         Debug.WriteLine(MD5hash);
                         if (MD5hash == item["PC Password MD5"].ToString())
                         {
-                            Employee_ID = int.Parse(item["Employee ID"].ToString());
+                            Employee_ID = int.Parse(item["Person ID"].ToString());
                             LoggedInEmployee.ID = Employee_ID;
                             loggedIn = true;
                             Proceed();
@@ -77,7 +77,7 @@ namespace IPT_Milk_Company_UI
             txt_Password.Text = "PASSWORD";
             //ValidateLogin();
 #endif
-            
+
         }
 
         private void txt_Password_KeyDown(object sender, KeyEventArgs e)
