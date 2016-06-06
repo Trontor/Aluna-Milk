@@ -9,10 +9,11 @@ using System.Text;
 using System.Windows.Forms;
 using MetroFramework.Forms;
 using System.Threading;
+using System.Diagnostics;
 
 namespace IPT_Milk_Company_UI
 {
-    public partial class Form1 : Form
+    public partial class Form1 : MetroForm
     {
         private DataTable table_Employees = new DataTable();
         private DataTable table_Persons = new DataTable();
@@ -33,7 +34,7 @@ namespace IPT_Milk_Company_UI
         {
             new frm_AddOrder().Show();
         }
-        private void button1_Click(object sender, EventArgs e)
+        private void btn_addProduct_Click(object sender, EventArgs e)
         {
             new frm_AddProduct().Show();
         }
@@ -243,5 +244,30 @@ namespace IPT_Milk_Company_UI
             MessageBox.Show("Sorry, this function does not exist yet!");
 
         }
+        public IEnumerable<Control> GetAll(Control control, Type type)
+        {
+            var controls = control.Controls.Cast<Control>();
+
+            return controls.SelectMany(ctrl => GetAll(ctrl, type))
+                                      .Concat(controls)
+                                      .Where(c => c.GetType() == type);
+        }
+        private void Form1_Resize(object sender, EventArgs e)
+        {
+        //    foreach (Panel view in GetAll(this,typeof(DataGridView)))
+        //    {
+        //        Debug.WriteLine(view.Parent.Name);
+        //        view.Dock = DockStyle.None;
+        //        Size parentSize = view.Parent.Size;
+        //        view.Size = new Size(parentSize.Width - 1, parentSize.Height - 1);
+        //        view.Location = new Point(1, 1);
+        //    }
+        }
+
+        private void tableLayoutPanel1_Paint(object sender, PaintEventArgs e)
+        {
+
+        }
+         
     }
 }
