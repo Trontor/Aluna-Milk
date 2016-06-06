@@ -122,6 +122,5 @@ C:\Users\rjoshi1\Source\Repos\Aluna-Milk\IPT Milk Company UI\obj\x86\Debug\IPT_M
 C:\Users\Rohyl Joshi\Source\Repos\Aluna-Milk\IPT Milk Company UI\obj\x86\Debug\IPT_Milk_Company_UI.frm_AddDealer.resources
 C:\Users\Rohyl Joshi\Source\Repos\Aluna-Milk\IPT Milk Company UI\obj\x86\Debug\IPT_Milk_Company_UI.frm_AddEmployee.resources
 C:\Users\Rohyl Joshi\Source\Repos\Aluna-Milk\IPT Milk Company UI\obj\x86\Debug\IPT_Milk_Company_UI.frm_AddTruck.resources
-C:\Users\Rohyl Joshi\Source\Repos\Aluna-Milk\IPT Milk Company UI\obj\x86\Debug\IPT Milk Company UI.csprojResolveAssemblyReference.cache
 C:\Users\rjoshi1\Source\Repos\Aluna-Milk\IPT Milk Company UI\obj\x86\Debug\IPT_Milk_Company_UI.frm_AddTruck.resources
 C:\Users\rjoshi1\Source\Repos\Aluna-Milk\IPT Milk Company UI\obj\x86\Debug\IPT Milk Company UI.csprojResolveAssemblyReference.cache

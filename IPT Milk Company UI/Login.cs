@@ -31,7 +31,7 @@ namespace IPT_Milk_Company_UI
 
         private void Fail()
         {
-            MessageBox.Show("Sorry, your login details are incorrect");
+            MessageBox.Show("Sorry, your login details are incorrect","Incorrect Details",  MessageBoxButtons.OK, MessageBoxIcon.Error);
         }
 
         private int Employee_ID = -1;

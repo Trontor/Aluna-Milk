@@ -12,7 +12,7 @@ using System.Threading;
 
 namespace IPT_Milk_Company_UI
 {
-    public partial class Form1 : MetroForm
+    public partial class Form1 : Form
     {
         private DataTable table_Employees = new DataTable();
         private DataTable table_Persons = new DataTable();
